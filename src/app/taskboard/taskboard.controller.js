@@ -10,7 +10,6 @@ angular.module('inspinia')
         vm.descriptionText = 'Taskboard';
         
         vm.taskDueStatusClass = function(task) {
-            alert(task.dueStatus.status);
         switch(task.dueStatus.status)
         {
             case 'Overdue' :
