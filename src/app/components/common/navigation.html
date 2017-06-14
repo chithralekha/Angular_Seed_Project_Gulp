@@ -28,6 +28,21 @@
             <li ui-sref-active="active">
                 <a ui-sref="index.taskboard"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span></a>
             </li>
+            <!-- TaskBoard [Roles : System, Debugger, Administrator, TaskBoardUser, TaskBoardUserReadOnly ]-->
+            <li>
+                <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
+                    <li><a ui-sref="index.task_board({filterText: 1, bcp: item.id})">bcp1</a></li>              
+                </ul>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
+                    <li  ng-class="{active: $state.includes('index.taskboard')}">
+                        <a href="#"><i class="fa fa-filter"></i> <span class="nav-label-second-level">Filters</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level collapse">
+                            <li><a ui-sref="{filterText: filter.filterId}">Filter1</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <li ui-sref-active="active">
                 <a ui-sref="index.minor"><i class="fa fa-sitemap"></i> <span class="nav-label">Operations</span></a>
             </li>          
