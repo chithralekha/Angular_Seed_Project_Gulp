@@ -32,13 +32,13 @@
             <li>
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
-                    <li><a ui-sref="index.task_board({filterText: 1, bcp: item.id})">bcp1</a></li>              
+                    <li><a ui-sref="index.taskboard({filterText: 1, bcp: 1})">bcp1</a></li>              
                 </ul>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
                     <li  ng-class="{active: $state.includes('index.taskboard')}">
                         <a href="#"><i class="fa fa-filter"></i> <span class="nav-label-second-level">Filters</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse">
-                            <li><a ui-sref="{filterText: filter.filterId}">Filter1</a></li>
+                            <li><a ui-sref="{filterText: 1}">Filter1</a></li>
                         </ul>
                     </li>
                 </ul>
