@@ -25,7 +25,7 @@
         data: { pageTitle: 'Example view' }
       })
       .state('index.taskboard', {
-        url: "/taskboard",
+        url: "/taskboard/:filterText?bcp",
         templateUrl: "app/taskboard/taskboard.html",
         data: { pageTitle: 'Taskboard' },
         controller: 'TaskboardController',
