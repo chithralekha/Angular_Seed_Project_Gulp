@@ -6,7 +6,7 @@
         .factory('dataservice', dataservice);
 
     /* @ngInject */
-    function dataservice($http, $location, $q, exception, logger) {
+    function dataservice($http, $location, $q, exception, logger,config) {
         var isPrimed = false;
         var primePromise;
 
@@ -17,7 +17,7 @@
         return service;
 
         function getAvengers() {
-            return $http.get('http://localhost:3706/api/WorkingSets/1/Tasks?filterId=1')
+            return $http.get(config.baseURL + 'WorkingSets/1/Tasks?filterId=1')
                 .then(getAvengersComplete)
                 .catch(function(message) {
                     exception.catcher('XHR Failed for getAvengers')(message);
