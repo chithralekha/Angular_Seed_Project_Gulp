@@ -34,14 +34,16 @@
             <li ng-class="{active: $state.includes('index.taskboard')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
-                    <li><a ui-sref="index.taskboard({filterText: 1, bcp: 1})">bcp1</a></li>              
+                    <li ng-class="navClass(item)"><a ui-sref="index.taskboard({filterText: 1, bcp: 1})">bcp1</a></li>
+                    <li ng-class="navClass(item)"><a ui-sref="index.taskboard({filterText: 1, bcp: 2})">bcp2</a></li>
+                    <li ng-class="navClass(item)"><a ui-sref="index.taskboard({filterText: 1, bcp: 3})">bcp3</a></li>
                 </ul>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index.taskboard')}">
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
                     <li  ng-class="{active: $state.includes('index.taskboard')}">
                         <a href="#"><i class="fa fa-filter"></i> <span class="nav-label-second-level">Filters</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse">
-                            <li><a ui-sref="index.taskboard({filterText: 1})">Filter1</a></li>
-                            <li><a ui-sref="index.taskboard({filterText: 2})">Filter2</a></li>
+                            <li ng-class="navClass(filter)"><a ui-sref="index.taskboard({filterText: 1})">Filter1</a></li>
+                            <li ng-class="navClass(filter)"><a ui-sref="index.taskboard({filterText: 2})">Filter2</a></li>
                         </ul>
                     </li>
                 </ul>
