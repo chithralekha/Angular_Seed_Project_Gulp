@@ -21,7 +21,14 @@
                 </div>
 
             </li>
-
+            <!-- DashBoards [Roles : System, Debugger, Administrator, QlikUser] -->
+            <li ng-class="{active: $state.includes('dashboards')}">
+                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">                    
+                    <li ui-sref-active="active"><a ui-sref="dashboards.home">Profiles<span class="label label-primary pull-right">NEW</span></a></li>
+                </ul>
+            </li>
+            
             <li ui-sref-active="active">
                 <a ui-sref="index.main"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Dashboard</span> </a>
             </li>
@@ -33,7 +40,7 @@
             <!-- TaskBoard [Roles : System, Debugger, Administrator, TaskBoardUser, TaskBoardUserReadOnly ]-->
             <li ng-class="{active: $state.includes('index.taskboard')}"  ng-controller = "NavigationController as vm">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index.taskboard')}">
                     <li ng-class="vm.bcpNavClass(bcp)" ng-repeat="bcp in vm.businessControlProfileList"><a ui-sref="index.taskboard({filterText: 1, bcp: bcp.id})">{{bcp.name}}</a></li>
 <!--
                     <li ng-class="navClass(item)"><a ui-sref="index.taskboard({filterText: 1, bcp: 1})">bcp1</a></li>
@@ -41,7 +48,7 @@
                     <li ng-class="navClass(item)"><a ui-sref="index.taskboard({filterText: 1, bcp: 3})">bcp3</a></li>
 -->
                 </ul>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index.taskboard')}">
                     <li  ng-class="{active: $state.includes('index.taskboard')}">
                         <a href="#"><i class="fa fa-filter"></i> <span class="nav-label-second-level">Filters</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse">
