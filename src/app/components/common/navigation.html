@@ -51,7 +51,7 @@
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
                     <li  ng-class="{active: $state.includes('index.taskboard')}">
                         <a href="#"><i class="fa fa-filter"></i> <span class="nav-label-second-level">Filters</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
+                        <ul class="nav nav-third-level collapse"  ng-class="{in: $state.includes('index')}">
                             <li ng-class="vm.filterNavClass(filter)" ng-repeat="filter in vm.filters"><a ui-sref="index.taskboard({filterText: filter.id})">{{filter.name}}</a></li>
 <!--
                             <li ng-class="navClass(filter)"><a ui-sref="index.taskboard({filterText: 1})">Filter1</a></li>
