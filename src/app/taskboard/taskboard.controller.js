@@ -23,6 +23,9 @@ angular.module('inspinia')
                 break;
         }
     };
+        vm.sortableOptions = {
+            connectWith: ".connectList"
+        };
         
         activate();
 
@@ -39,6 +42,7 @@ angular.module('inspinia')
         function getAvengers() {
             return dataservice.getAvengers().then(function (data) {
                 vm.todoList = data.taskInfos;
+                vm.inProgressList = data.taskInfos;
                 return vm.todoList;
             });
         }
