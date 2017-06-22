@@ -24,7 +24,7 @@
                             <button type="button" class="btn btn-sm btn-white" ng-click="openTaskDetailsDialog(null)"> <i class="fa fa-plus"></i> Add task</button>
                         </span>
                     </div>
-                    <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="vm.todoList">
+                    <ul ui-sortable="vm.sortableOptions" class="sortable-list connectList agile-list" ng-model="vm.todoList">
                         <li ng-class="vm.taskDueStatusClass(task)" ng-repeat="task in vm.todoList">
                             <div class="agile-detail">
                                 <button type="button"  ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title}} </button>
@@ -45,10 +45,10 @@
                 <div class="ibox-content">
                     <h3>Active</h3>
                     <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
-                    <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="inProgressList">
-                        <li ng-class="taskDueStatusClass(task)"  ng-repeat="task in inProgressList | freeFormat : taskOrCode | dateRange:daterange.startDate :daterange.endDate | responsibleUser : responsibleUserList.selected | controlCatalogue : controlCatalogue | filter : { title: filterText.name || task, dueStatus : { id : dueStatus }}">
+                    <ul ui-sortable="vm.sortableOptions" class="sortable-list connectList agile-list" ng-model="vm.inProgressList">
+                        <li ng-class="taskDueStatusClass(task)"  ng-repeat="task in vm.inProgressList">
                            <div class="agile-detail">                               
-                                  <button type="button" ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title | cut:true:25:' ...'}} </button>
+                                  <button type="button" ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title}} </button>
                                 <p class="pull-right"><i class="fa fa-clock-o"></i>{{task.due|date}}</p>                         
                             </div>  
                             <div class="agile-detail">                               
