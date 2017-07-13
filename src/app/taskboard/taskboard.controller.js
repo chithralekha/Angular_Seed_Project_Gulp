@@ -53,3 +53,12 @@ angular.module('inspinia')
         });
     }
 });
+
+//        function getAvengers() {
+//            return dataservice.getAvengers().then(function (data) {
+//                vm.todoList = data.tasks;
+//                vm.inProgressList = data.tasks;
+//                return vm.todoList;
+//            });
+//        }
+//    });
