@@ -46,7 +46,7 @@
                     <h3>Active</h3>
                     <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
                     <ul ui-sortable="vm.sortableOptions" class="sortable-list connectList agile-list" ng-model="vm.inProgressList">
-                        <li ng-class="taskDueStatusClass(task)"  ng-repeat="task in vm.inProgressList">
+                        <li ng-class="vm.taskDueStatusClass(task)"  ng-repeat="task in vm.inProgressList">
                            <div class="agile-detail">                               
                                   <button type="button" ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title}} </button>
                                 <p class="pull-right"><i class="fa fa-clock-o"></i>{{task.due|date}}</p>                         
@@ -67,7 +67,7 @@
                     <h3>Completed</h3>
                     <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
                     <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="completedList">
-                        <li ng-class="taskDueStatusClass(task)" enableStatus(task) ng-repeat="task in completedList  | freeFormat : taskOrCode | dateRange:daterange.startDate :daterange.endDate | responsibleUser : responsibleUserList.selected | controlCatalogue : controlCatalogue | filter : { title: filterText.name || task, dueStatus : { id : dueStatus }}">
+                        <li ng-class="vm.taskDueStatusClass(task)" enableStatus(task) ng-repeat="task in completedList  | freeFormat : taskOrCode | dateRange:daterange.startDate :daterange.endDate | responsibleUser : responsibleUserList.selected | controlCatalogue : controlCatalogue | filter : { title: filterText.name || task, dueStatus : { id : dueStatus }}">
                             <div class="agile-detail">
                                 <button type="button"  ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title | cut:true:25:' ...'}} </button>
                                 <p class="pull-right"><i class="fa fa-clock-o"></i>{{task.due|date}}</p>
