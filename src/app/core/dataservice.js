@@ -14,7 +14,8 @@
         var primePromise;
 
         var service = {
-            getAvengers: getAvengers
+            getAvengers: getAvengers,
+            getAllTasks : getAllTasks
         };
 
         return service;
@@ -23,7 +24,7 @@
             
             var deferred = $q.defer();
             
-            //var tasksPromise = getAllTasks(bcp, filterId);
+            var tasksPromise = getAllTasks(bcp, filterId);
             
             return $http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
                 .then(getAvengersComplete)
@@ -35,28 +36,28 @@
             function getAvengersComplete(data, status, headers, config) {
                 return data.data;
             }
-           // return deferred.promise;
+            return deferred.promise;
         }
         
-//        function getAllTasks(bcp, filterId) {
-//
-//            return $http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
-//            .then(sendResponseData)
-//            .catch(sendGetTasksError)
-//
-//        }
-//        
-//        function sendResponseData(response) {
-//
-//            return response.data;
-//
-//        }
-//
-//        function sendGetTasksError(response) {
-//
-//            return $q.reject('Error retrieving Tasks. (HTTP status: ' + response.status + ')');
-//
-//        }
+        function getAllTasks(bcp, filterId) {
+
+            return $http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
+            .then(sendResponseData)
+            .catch(sendGetTasksError)
+
+        }
+        
+        function sendResponseData(response) {
+
+            return response.data;
+
+        }
+
+        function sendGetTasksError(response) {
+
+            return $q.reject('Error retrieving Tasks. (HTTP status: ' + response.status + ')');
+
+        }
 
     }
     
