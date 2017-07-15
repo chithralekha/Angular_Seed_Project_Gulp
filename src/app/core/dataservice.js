@@ -5,7 +5,7 @@
         .module('inspinia')
         .factory('dataservice', dataservice)
         .value('taskDueStatusClassService', {
-            retrieveTaskDueStatusClass: retrieveTaskDueStatusClass
+            retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
 
     /* @ngInject */
