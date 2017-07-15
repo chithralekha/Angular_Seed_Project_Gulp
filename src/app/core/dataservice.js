@@ -14,8 +14,10 @@
         var primePromise;
 
         var service = {
-            getAvengers: getAvengers,
+            
+            getAvengers : getAvengers,
             getAllTasks : getAllTasks
+            
         };
 
         return service;
@@ -25,24 +27,30 @@
             var deferred = $q.defer();
             
             var tasksPromise = getAllTasks(bcp, filterId);
+            
             $q.when(tasksPromise)
             .then(function (tasksData) {
+                
                 var allTasks = tasksData.taskInfos;
                 var todoList = [], inProgressList = [], completedList = [];
+                
                 allTasks.forEach(function (currentTask, index, array) {
+                    
                     if(currentTask.taskState.id === 1)
                         todoList.push(currentTask);
                     else if(currentTask.taskState.id === 2)
                         inProgressList.push(currentTask);
                     else if( currentTask.taskState.id === 3)
                         completedList.push(currentTask);
-                })
+                });
+                
                 var tasksSummaryData = {
                     todoList : todoList,
                     inProgressList : inProgressList,
                     completedList : completedList
                     
                 };
+                
                  deferred.resolve(tasksSummaryData);
             });
            
@@ -60,6 +68,7 @@
             
             //TODO: uncomment the bellow http get if no header specification required.
             //$http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
+            //Following .then and .catch applies to both with headers and without headers.
 //                .then(getAvengersComplete)
 //                .catch(function(message) {
 //                    exception.catcher('XHR Failed for getAvengers')(message);
