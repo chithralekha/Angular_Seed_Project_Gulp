@@ -47,8 +47,10 @@ angular.module('inspinia')
     function getAvengers(bcp, filterId) {
         return dataservice.getAvengers(bcp, filterId)
             .then(function (data) {
-            vm.todoList = data.taskInfos;
-            vm.inProgressList = data.taskInfos;
+            alert(data.todoList);
+            vm.todoList = data.todoList;
+            vm.inProgressList = data.inProgressList;
+            vm.completedList = data.completedList;
            return vm.todoList;
         });
     }
