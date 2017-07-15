@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams) {
+    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state) {
     
     var vm = this;
     
@@ -31,7 +31,11 @@ angular.module('inspinia')
     };
     
     activate();
-    
+    vm.reload = function () {
+        //alert('Hi');
+        //activate();
+        $state.reload();
+    }
     function activate() {
         //Following comment is from the original sorce, CleanCode by John Papa
         //            Using a resolver on all routes or dataservice.ready in every controller
