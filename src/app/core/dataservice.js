@@ -25,13 +25,46 @@
             var deferred = $q.defer();
             
             var tasksPromise = getAllTasks(bcp, filterId);
+            $q.when(tasksPromise)
+            .then(function (tasksData) {
+                var allTasks = tasksData.taskInfos;
+                var todoList = [], inProgressList = [], completedList = [];
+                allTasks.forEach(function (currentTask, index, array) {
+                    if(currentTask.taskState.id === 1)
+                        todoList.push(currentTask);
+                    else if(currentTask.taskState.id === 2)
+                        inProgressList.push(currentTask);
+                    else if( currentTask.taskState.id === 3)
+                        completedList.push(currentTask);
+                })
+                var tasksSummaryData = {
+                    todoList : todoList,
+                    inProgressList : inProgressList,
+                    completedList : completedList
+                    
+                };
+                 deferred.resolve(tasksSummaryData);
+            });
+           
+//            alert(tasksPromise);
             
-            return $http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
-                .then(getAvengersComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed for getAvengers')(message);
-                    $location.url('/');
-                });
+//            return $http({
+//                method: 'GET',
+//                url: config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+//            })
+            
+            //TODO: uncomment the bellow http get if no header specification required.
+            //$http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
+//                .then(getAvengersComplete)
+//                .catch(function(message) {
+//                    exception.catcher('XHR Failed for getAvengers')(message);
+//                    $location.url('/');
+//                });
 
             function getAvengersComplete(data, status, headers, config) {
                 return data.data;
@@ -41,7 +74,15 @@
         
         function getAllTasks(bcp, filterId) {
 
-            return $http.get(config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId)
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
             .then(sendResponseData)
             .catch(sendGetTasksError)
 
