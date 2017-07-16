@@ -50,20 +50,42 @@ angular.module('inspinia')
 //                name : 'bcp4'
 //            }
 //        ];
-        vm.filters = [
-            {
-                id : 1,
-                name : 'No Filter'
-            },
-            {
-                id : 2,
-                name : 'Unassigned'
-            },
-            {
-                id : 3,
-                name : 'Overdue'
-            }
-        ];
+    dataservice.getAllFilters()
+            .then(getFiltersSuccess, null, getFiltersNotification)
+            .catch(errorCallback)
+            .finally(getAllFiltersComplete);
+
+        function getFiltersSuccess(filters) {
+            //throw 'error in success handler';
+            vm.filters = filters;
+            alert(vm.filters);
+        }
+
+        function getFiltersNotification(notification) {
+            //console.log('Promise Notification: ' + notification);
+        }
+
+        function errorCallback(errorMsg) {
+            console.log('Error Message: ' + errorMsg);
+        }
+
+        function getAllFiltersComplete() {
+            //console.log('getAllBooks has completed');
+        }
+//        vm.filters = [
+//            {
+//                id : 1,
+//                name : 'No Filter'
+//            },
+//            {
+//                id : 2,
+//                name : 'Unassigned'
+//            },
+//            {
+//                id : 3,
+//                name : 'Overdue'
+//            }
+//        ];
         vm.bcpNavClass = function (bcp) {
             //alert( $stateParams.bcp);
           return bcp.id ==  $stateParams.bcp ? 'active' : '';  

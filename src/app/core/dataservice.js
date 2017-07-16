@@ -17,7 +17,8 @@
             
             getTasksSummary : getTasksSummary,
             getAllTasks : getAllTasks,
-            getAllWorkingSets : getAllWorkingSets
+            getAllWorkingSets : getAllWorkingSets,
+            getAllFilters : getAllFilters
             
         };
 
@@ -127,6 +128,27 @@
         function sendGetWorkingSetsError(response) {
 
             return $q.reject('Error retrieving WorkingSets. (HTTP status: ' + response.status + ')');
+
+        }
+        
+        function getAllFilters() {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'Filters/'
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
+            .then(sendResponseData)
+            .catch(sendGetFiltersError)
+            
+        }
+        
+        function sendGetFiltersError(response) {
+
+            return $q.reject('Error retrieving Filters. (HTTP status: ' + response.status + ')');
 
         }
 
