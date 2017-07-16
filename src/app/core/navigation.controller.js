@@ -9,24 +9,47 @@ angular.module('inspinia')
         vm.helloText = 'Taskboard';
         vm.descriptionText = 'Taskboard';
         
-        vm.businessControlProfileList = [
-            {
-                id : 1,
-                name : 'bcp1'
-            },
-            {
-                id : 2,
-                name : 'bcp2'
-            },
-            {
-                id : 3,
-                name : 'bcp3'
-            },
-            {
-                id : 4,
-                name : 'bcp4'
-            }
-        ];
+        dataservice.getAllWorkingSets()
+            .then(getWorkingSetsSuccess, null, getWorkingSetsNotification)
+            .catch(errorCallback)
+            .finally(getAllWorkingSetsComplete);
+
+        function getWorkingSetsSuccess(workingSets) {
+            //throw 'error in success handler';
+            vm.businessControlProfileList = workingSets;
+            alert(vm.businessControlProfileList);
+        }
+
+        function getWorkingSetsNotification(notification) {
+            //console.log('Promise Notification: ' + notification);
+        }
+
+        function errorCallback(errorMsg) {
+            console.log('Error Message: ' + errorMsg);
+        }
+
+        function getAllWorkingSetsComplete() {
+            //console.log('getAllBooks has completed');
+        }
+
+//        vm.businessControlProfileList = [
+//            {
+//                id : 1,
+//                name : 'bcp1'
+//            },
+//            {
+//                id : 2,
+//                name : 'bcp2'
+//            },
+//            {
+//                id : 3,
+//                name : 'bcp3'
+//            },
+//            {
+//                id : 4,
+//                name : 'bcp4'
+//            }
+//        ];
         vm.filters = [
             {
                 id : 1,

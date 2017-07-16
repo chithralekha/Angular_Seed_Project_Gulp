@@ -15,14 +15,15 @@
 
         var service = {
             
-            getAvengers : getAvengers,
-            getAllTasks : getAllTasks
+            getTasksSummary : getTasksSummary,
+            getAllTasks : getAllTasks,
+            getAllWorkingSets : getAllWorkingSets
             
         };
 
         return service;
 
-        function getAvengers(bcp, filterId) {
+        function getTasksSummary(bcp, filterId) {
             
             var deferred = $q.defer();
             
@@ -75,9 +76,9 @@
 //                    $location.url('/');
 //                });
 
-            function getAvengersComplete(data, status, headers, config) {
-                return data.data;
-            }
+//            function getAvengersComplete(data, status, headers, config) {
+//                return data.data;
+//            }
             return deferred.promise;
         }
         
@@ -106,6 +107,26 @@
         function sendGetTasksError(response) {
 
             return $q.reject('Error retrieving Tasks. (HTTP status: ' + response.status + ')');
+
+        }
+        
+        function getAllWorkingSets() {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'WorkingSets/'
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
+            .then(sendResponseData)
+            .catch(sendGetWorkingSetsError)
+        }
+        
+        function sendGetWorkingSetsError(response) {
+
+            return $q.reject('Error retrieving WorkingSets. (HTTP status: ' + response.status + ')');
 
         }
 

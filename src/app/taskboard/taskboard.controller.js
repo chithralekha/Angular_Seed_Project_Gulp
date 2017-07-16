@@ -31,25 +31,27 @@ angular.module('inspinia')
     };
     
     activate();
+    
     vm.reload = function () {
         //alert('Hi');
         //activate();
         $state.reload();
     }
+    
     function activate() {
         //Following comment is from the original sorce, CleanCode by John Papa
         //            Using a resolver on all routes or dataservice.ready in every controller
         //            var promises = [getAvengers()];
         //            return dataservice.ready(promises).then(function(){
         
-        return getAvengers($stateParams.bcp,$stateParams.filterText)
+        return getTasksSummary($stateParams.bcp,$stateParams.filterText)
                 .then(function () {
                 logger.info('Activated Taskboard View');
             });
         }
     
-    function getAvengers(bcp, filterId) {
-        return dataservice.getAvengers(bcp, filterId)
+    function getTasksSummary(bcp, filterId) {
+        return dataservice.getTasksSummary(bcp, filterId)
             .then(function (data) {
             alert(data.todoList);
             vm.todoList = data.todoList;
