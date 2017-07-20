@@ -25,7 +25,7 @@
         data: { pageTitle: 'Example view' }
       });
 
-    $urlRouterProvider.otherwise('/index/main');
+    $urlRouterProvider.otherwise('/login');
   }
 
 })();
