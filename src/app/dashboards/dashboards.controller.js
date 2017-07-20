@@ -25,7 +25,7 @@ angular.module('inspinia')
     function getAllWorkingSets() {
         return dataservice.getAllWorkingSets()
             .then(function (data) {
-            alert(data);
+            //alert(data);
             vm.businessControlProfileList = data;
             vm.inProgressList = data.inProgressList;
             vm.completedList = data.completedList;

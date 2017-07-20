@@ -53,7 +53,7 @@ angular.module('inspinia')
     function getTasksSummary(bcp, filterId) {
         return dataservice.getTasksSummary(bcp, filterId)
             .then(function (data) {
-            alert(data.todoList);
+            //alert(data.todoList);
             vm.todoList = data.todoList;
             vm.inProgressList = data.inProgressList;
             vm.completedList = data.completedList;
