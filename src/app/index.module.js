@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('inspinia', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'ngRoute','oc.lazyLoad', 'ui.sortable']);
+    .module('inspinia', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'ngRoute','oc.lazyLoad', 'ui.sortable','gridshore.c3js.chart']);
 
 })();

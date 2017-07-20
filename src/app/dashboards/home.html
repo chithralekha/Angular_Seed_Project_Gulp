@@ -8,3 +8,85 @@
         </ol>
     </div>
 </div>
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row" style="margin-top:20px; margin-left:5px;" ng-repeat="item in vm.businessControlProfileList">
+    <div class="ibox float-e-margins col-lg-8">
+        <div class="ibox-title">
+            <span class="label label-primary pull-right" ng-click="complianceScore(item)"></span>
+            <h5>{{item.name}}</h5>
+        </div>
+        
+        <div class="ibox-content">
+            
+            <div class="row">
+                
+                <div class="col-lg-6"  ng-click = "showClick(item)">                    
+                    <c3chart bindto-id="gauge-plot{{item.id}}-chart">
+                        <chart-column column-id="{{item.name}}" column-color="{{item.color}}"
+                                          column-values="{{item.workingSetCompliance}}"
+                                          column-type="gauge"/>
+                        <chart-gauge min="0"
+                                         max="100"
+                                         units="Score"/>
+                        <chart-events on-click-data="showClick(item)"/>
+                    </c3chart>                    
+                </div>
+                
+                <div class="col-lg-6">
+                    
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right hidden" ng-click="complianceScore(item)">?</span>
+                            <h5>Control Catalogues</h5>
+                            <span class="pull-right"><h5>Compliance Percentage</h5></span>
+                        </div>
+                        
+                        <div class="ibox-content">
+                            <div>
+                                <ul class="list-group clear-list m-t" ng-repeat="cs in item.workingSetTemplate.controlSets | limitTo:4" ng-init="outerIndex = $index">
+                                    <li class="list-group-item">
+                                        <span class="label label-success hidden">{{outerIndex + 1}}</span>
+                                        <span class="pull-right" ng-class="controlSetComplianceClass(cs)">{{cs.controlSetCompliance}} %</span>
+                                        <!-- {'color-red': cs.controlSetCompliance === 0.5, 'color-orange': cs.controlSetCompliance === 0.5, 'color-green': cs.controlSetCompliance === 0.5} -->
+                                        <span class="label label-success"></span>{{cs.title }}
+                                    </li>                                     
+                                </ul>
+                                <ul class="list-group clear-list m-t">
+                                    <li class="list-group-item">
+                                        <span class="label label-primary pull-right"></span>
+                                    </li>                                     
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <a ui-sref="dashboards.dashboardSingleWorkingSet({obj: item})"><span class="label label-primary pull-right">More....</span></a>
+                    </div>
+                
+                    <div class="col-lg-3 hidden">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-primary pull-right" ng-click="complianceScore(item)"></span>
+                            <h5>Users</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <ul class="list-group clear-list m-t" ng-repeat="user in item.users | limitTo:4">
+                                <li class="list-group-item clear-list">
+                                    <span class="label label-success"></span>{{user.userName}}
+                                </li>
+                            </ul>
+                            <ul class="list-group clear-list m-t">
+                                <li class="list-group-item">
+                                    <span class="label label-primary pull-right"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                
+                </div>
+            </div>
+    </div>
+
+</div>
+</div>

@@ -17,7 +17,7 @@ angular.module('inspinia')
         function getWorkingSetsSuccess(workingSets) {
             //throw 'error in success handler';
             vm.businessControlProfileList = workingSets;
-            alert(vm.businessControlProfileList);
+            //alert(vm.businessControlProfileList);
         }
 
         function getWorkingSetsNotification(notification) {
@@ -58,11 +58,11 @@ angular.module('inspinia')
         function getFiltersSuccess(filters) {
             //throw 'error in success handler';
             vm.filters = filters;
-            alert(vm.filters);
+            //alert(vm.filters);
         }
 
         function getFiltersNotification(notification) {
-            //console.log('Promise Notification: ' + notification);
+            console.log('Promise Notification: ' + notification);
         }
 
         function errorCallback(errorMsg) {
@@ -70,7 +70,7 @@ angular.module('inspinia')
         }
 
         function getAllFiltersComplete() {
-            //console.log('getAllBooks has completed');
+            console.log('getAllFilters has completed');
         }
 //        vm.filters = [
 //            {
@@ -91,25 +91,10 @@ angular.module('inspinia')
           return bcp.id ==  $stateParams.bcp ? 'active' : '';  
         };
         vm.filterNavClass = function (filter) {
-            return filter.id == $stateParams.filterText ? 'active' : '';
-        } 
-
-        //activate();
-
-
-        function activate() {
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            var promises = [getAvengers()];
-//            return dataservice.ready(promises).then(function(){
-            return getAvengers().then(function () {
-                logger.info('Activated Avengers View');
-            });
-        }
-
-        function getAvengers() {
-            return dataservice.getAvengers().then(function (data) {
-                vm.todoList = data.taskInfos;
-                return vm.todoList;
-            });
+            //alert('FilterID =' + filter.id);
+            //alert('FilterText =' + $stateParams.filterText);
+            var filterClass = filter.filterId == $stateParams.filterText ? 'active' : '';
+            //alert(filterClass);
+            return filterClass
         }
     });
