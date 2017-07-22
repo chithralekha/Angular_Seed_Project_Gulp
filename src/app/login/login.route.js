@@ -11,7 +11,7 @@
       .state('login', {
         url: "/login",
         templateUrl: "app/login/login.html",
-        data: { pageTitle: 'Login' },
+         data: { pageTitle: 'Login', specialClass: 'login-bg' },
         controller: 'LoginController',
         controllerAs: 'vm'
                         
