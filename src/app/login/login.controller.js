@@ -1,13 +1,16 @@
 angular.module('inspinia')
-    .controller('LoginController', function (dataservice, logger) {
+    .controller('LoginController', function (dataservice, logger, $state) {
     
         var vm = this;
 
         vm.userName = 'Example user';
         vm.helloText = 'Dashboard';
         vm.descriptionText = 'Dashboard';
+        vm.login = function() {
+             $state.go('index.dashboards');
+        }
     
-     activate();
+//     activate();
     
     function activate() {
         //Following comment is from the original sorce, CleanCode by John Papa
