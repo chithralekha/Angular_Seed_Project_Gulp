@@ -197,6 +197,7 @@
         
         function sendResponseData(response) {
 
+            //alert(response.data.access_token);
             return response.data;
 
         }
