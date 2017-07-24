@@ -4,6 +4,7 @@
     angular
         .module('inspinia')
         .factory('dataservice', dataservice)
+        .factory('AuthFactory', AuthFactory)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
@@ -152,6 +153,23 @@
 
         }
 
+    }
+    
+    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config) {
+        var authFac = {},
+            TOKEN_KEY = 'Token',
+            isAuthenticated = false,
+            username = '',
+            authToken = undefined;
+        var authFac = {
+            authenticate : authenticate
+        };
+        
+        return authFac;
+        
+        function authenticate() {
+            
+        }
     }
     
     function retrieveTaskDueStatusClass(task) {
