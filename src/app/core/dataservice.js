@@ -34,7 +34,7 @@
             $q.when(tasksPromise)
             .then(function (tasksData) {
                 
-                var allTasks = tasksData.taskInfos;
+                var allTasks = tasksData.tasks;
                 var todoList = [], inProgressList = [], completedList = [];
                 
                 allTasks.forEach(function (currentTask, index, array) {
@@ -167,8 +167,44 @@
         
         return authFac;
         
-        function authenticate() {
+        function authenticate(username, password) {
             
+            var data = $.param({
+                'grant_type' : 'password',
+                'username' : username,
+                'password' : password
+            }),
+                Config = {
+                    headers : {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                };
+            
+           return $http.post(config.authURL + 'oauth/token', data, Config)
+          // following code for some reason gives CORS error.
+            //  return $http({
+           //     method: 'POST',
+           //     url: config.authURL + 'oauth/token',
+           //     headers : {
+           //             'Content-Type' : 'application/x-www-form-urlencoded'
+           //         }
+            //                transformResponse: transformGetBooks,
+            //                cache: true
+            //   })
+            .then(sendResponseData)
+            .catch(sendAuthError)
+        }
+        
+        function sendResponseData(response) {
+
+            return response.data;
+
+        }
+        
+        function sendAuthError(response) {
+
+            return $q.reject('Error retrieving the AuthFac Service. (HTTP status: ' + response.status + ')');
+
         }
     }
     

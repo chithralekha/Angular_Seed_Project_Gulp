@@ -1,13 +1,19 @@
 angular.module('inspinia')
-    .controller('LoginController', function (dataservice, logger, $state) {
+    .controller('LoginController', function (dataservice, logger, $state, AuthFactory) {
     
         var vm = this;
 
         vm.userName = 'Example user';
         vm.helloText = 'Dashboard';
         vm.descriptionText = 'Dashboard';
+    vm.userName = '';
+    vm.password = '';
         vm.login = function() {
-             $state.go('index.dashboards');
+            AuthFactory.authenticate(vm.username, vm.password)
+            .then(function (data) {
+                $state.go('index.dashboards');
+            });
+             
         }
     
 //     activate();

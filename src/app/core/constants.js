@@ -8,7 +8,9 @@
         .constant('moment', moment)
         .constant('config', {
         baseURL : 'http://localhost:3706/api/',
-        authURL : 'http://ec2-35-164-78-65.us-west-2.compute.amazonaws.com/MagpieIdentity/',
+        authURL : 'http://localhost:50443/',
+        //           'http://ec2-52-33-130-108.us-west-2.compute.amazonaws.com:8081/MagpieIdentity/',
+        //            'http://localhost:50443/',
         //            baseURL : 'http://localhost:3706/api/',
         //            authURL : 'http://ec2-54-148-177-100.us-west-2.compute.amazonaws.com/MagpieIdentity/',
         oldTroutBaseURL : 'http://localhost:9092/Landing/index?n='
