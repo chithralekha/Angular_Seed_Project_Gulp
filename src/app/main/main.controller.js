@@ -5,7 +5,9 @@ angular.module('inspinia')
 
     var vm = this;
 
-    vm.userName = AuthFactory.getUserName;
+    vm.userName = '';
+        //AuthFactory.getUserName();
+    //alert(vm.userName);
     vm.helloText = 'Welcome in INSPINIA Gulp SeedProject';
     vm.descriptionText = 'It is an application skeleton for a typical AngularJS web app. You can use it to quickly bootstrap your angular webapp projects.';
 

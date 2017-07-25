@@ -1,5 +1,5 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse" ng-controller = "NavigationController as vm">
+    <div class="sidebar-collapse"   ng-controller = "NavigationController as vm">
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
 
@@ -40,7 +40,7 @@
             </li>
 -->
             <!-- TaskBoard [Roles : System, Debugger, Administrator, TaskBoardUser, TaskBoardUserReadOnly ]-->
-            <li ng-class="{active: $state.includes('index.taskboard')}"  ng-controller = "NavigationController as vm">
+            <li ng-class="{active: $state.includes('index.taskboard')}">
                 <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Taskboard</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('index')}">
                     <li ng-class="vm.bcpNavClass(bcp)" ng-repeat="bcp in vm.businessControlProfileList"><a ui-sref="index.taskboard({filterText: 1, bcp: bcp.id})">{{bcp.name}}</a></li>
