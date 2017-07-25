@@ -194,6 +194,8 @@
         var authFac = {
             authenticate : authenticate,
             getUserName : getUserName
+//            ,
+//            getUserData : getUserData
         };
         
         return authFac;
@@ -212,16 +214,21 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 };
+            
             var authPromise  =   $http.post(config.authURL + 'oauth/token', data, Config);
             $q.when(authPromise)
             .then(function (authData) {
+                
                 userData.isAuthenticated = 'true';
                 userData.username = username;
                 userData.bearerToken = authData.access_token;
                 userData.expirationDate = new Date(authData['.expires']);
+                
                 deferred.resolve(userData);
+                
                 storeUserCredentials({username:username, token: authData.access_token});
             });
+            
             return deferred.promise;
             
         //   return $http.post(config.authURL + 'oauth/token', data, Config)
@@ -241,6 +248,7 @@
 //           })
 //            .catch(sendAuthError)
         }
+        
         function getUserName ()
         {
             return userData.username;
