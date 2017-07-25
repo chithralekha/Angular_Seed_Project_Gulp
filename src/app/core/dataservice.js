@@ -193,9 +193,8 @@
         
         var authFac = {
             authenticate : authenticate,
-            getUserName : getUserName
-//            ,
-//            getUserData : getUserData
+            getUserName : getUserName,
+            getUserData : getUserData
         };
         
         return authFac;
@@ -216,6 +215,7 @@
                 };
             
             var authPromise  =   $http.post(config.authURL + 'oauth/token', data, Config);
+
             $q.when(authPromise)
             .then(function (authData) {
                 
@@ -226,8 +226,9 @@
                 
                 deferred.resolve(userData);
                 
-                storeUserCredentials({username:username, token: authData.access_token});
-            });
+                storeUserCredentials(userData);
+            })
+            .catch(sendAuthError);
             
             return deferred.promise;
             
@@ -249,14 +250,18 @@
 //            .catch(sendAuthError)
         }
         
-        function getUserName ()
-        {
+        function getUserName () {
             return userData.username;
         }
+        
+        function getUserData () {
+            return userData;
+        }
+        
         function sendResponseData(response) {
-
+            
             //alert(response.data.access_token);
-            alert('userName =' + response.data);
+            //alert('userName =' + response.data);
             storeUserCredentials({username:username, token: response.token});
             //$rootScope.$broadcast('login:Successful');
             return response.data;
@@ -266,14 +271,15 @@
         function storeUserCredentials(credentials) {
             
             $localStorage.storeObject(TOKEN_KEY, credentials);
-            useCredentials(credentials);
+            // Commented below code because this has been handled using $q.defer
+            // useCredentials(credentials);
         }
         
         function useCredentials(credentials) {
             isAuthenticated = true;
             username = credentials.username;
             authToken = credentials.token;
-            alert(username);
+            // alert(username);
             // Set the token as header for your requests!
             // $http.defaults.headers.common['x-access-token'] = authToken;
         }

@@ -27,8 +27,9 @@
                                           column-type="gauge"/>
                         <chart-gauge min="0"
                                          max="100"
-                                         units="Score"/>
+                                         units="Score" expand="true" label-format-function = "vm.formatValue(item.workingSetCompliance, 0)"/>
                         <chart-events on-click-data="showClick(item)"/>
+                        
                     </c3chart>                    
                 </div>
                 
