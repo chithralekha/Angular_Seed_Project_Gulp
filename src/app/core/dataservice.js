@@ -5,6 +5,7 @@
         .module('inspinia')
         .factory('dataservice', dataservice)
         .factory('AuthFactory', AuthFactory)
+        .factory('$localStorage', $localStorage)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
@@ -155,19 +156,51 @@
 
     }
     
-    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config) {
+    function $localStorage($window) {
+    return {
+        store: function (key, value) {
+            $window.localStorage[key] = value;
+        },
+        get: function (key, defaultValue) {
+            return $window.localStorage[key] || defaultValue;
+        },
+        remove: function (key) {
+            $window.localStorage.removeItem(key);
+        },
+        storeObject: function (key, value) {
+            $window.localStorage[key] = JSON.stringify(value);
+        },
+        getObject: function (key, defaultValue) {
+            return JSON.parse($window.localStorage[key] || defaultValue);
+        }
+    }
+    }
+    
+    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage) {
+        
         var authFac = {},
             TOKEN_KEY = 'Token',
             isAuthenticated = false,
             username = '',
             authToken = undefined;
+        
+        var userData = {
+                isAuthenticated: false,
+                username: '',
+                bearerToken: '',
+                expirationDate: null
+            };
+        
         var authFac = {
-            authenticate : authenticate
+            authenticate : authenticate,
+            getUserName : getUserName
         };
         
         return authFac;
         
         function authenticate(username, password) {
+            
+            var deferred = $q.defer();
             
             var data = $.param({
                 'grant_type' : 'password',
@@ -179,9 +212,21 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 };
+            var authPromise  =   $http.post(config.authURL + 'oauth/token', data, Config);
+            $q.when(authPromise)
+            .then(function (authData) {
+                userData.isAuthenticated = 'true';
+                userData.username = username;
+                userData.bearerToken = authData.access_token;
+                userData.expirationDate = new Date(authData['.expires']);
+                deferred.resolve(userData);
+                storeUserCredentials({username:username, token: authData.access_token});
+            });
+            return deferred.promise;
             
-           return $http.post(config.authURL + 'oauth/token', data, Config)
-          // following code for some reason gives CORS error.
+        //   return $http.post(config.authURL + 'oauth/token', data, Config)
+          
+            // following code for some reason gives CORS error.
             //  return $http({
            //     method: 'POST',
            //     url: config.authURL + 'oauth/token',
@@ -191,15 +236,38 @@
             //                transformResponse: transformGetBooks,
             //                cache: true
             //   })
-            .then(sendResponseData)
-            .catch(sendAuthError)
+//            .then(function (response) {
+//               storeUserCredentials({username:username, token: response.data.access_token});
+//           })
+//            .catch(sendAuthError)
         }
-        
+        function getUserName ()
+        {
+            return userData.username;
+        }
         function sendResponseData(response) {
 
             //alert(response.data.access_token);
+            alert('userName =' + response.data);
+            storeUserCredentials({username:username, token: response.token});
+            //$rootScope.$broadcast('login:Successful');
             return response.data;
 
+        }
+        
+        function storeUserCredentials(credentials) {
+            
+            $localStorage.storeObject(TOKEN_KEY, credentials);
+            useCredentials(credentials);
+        }
+        
+        function useCredentials(credentials) {
+            isAuthenticated = true;
+            username = credentials.username;
+            authToken = credentials.token;
+            alert(username);
+            // Set the token as header for your requests!
+            // $http.defaults.headers.common['x-access-token'] = authToken;
         }
         
         function sendAuthError(response) {

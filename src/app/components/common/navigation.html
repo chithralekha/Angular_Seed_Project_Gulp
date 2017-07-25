@@ -1,5 +1,5 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
+    <div class="sidebar-collapse" ng-controller = "NavigationController as vm">
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
 
@@ -7,7 +7,7 @@
                     <a uib-dropdown-toggle="" href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{main.userName}}</strong>
+                                    <strong class="font-bold">{{vm.userName}}</strong>
                              </span>
                                 <span class="text-muted text-xs block">Example menu<b class="caret"></b></span>
                             </span>

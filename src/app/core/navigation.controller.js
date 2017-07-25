@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('NavigationController', function (dataservice, logger, $stateParams) {
+    .controller('NavigationController', function (dataservice, logger, $stateParams, AuthFactory) {
     
         var vm = this;
 
-        vm.userName = 'Example user';
+        vm.userName = AuthFactory.getUserName();
         vm.helloText = 'Taskboard';
         vm.descriptionText = 'Taskboard';
         
