@@ -1,5 +1,5 @@
 angular.module('inspinia')
-    .controller('LoginController', function (dataservice, logger, $state, AuthFactory,$localStorage) {
+    .controller('LoginController', function (dataservice, logger, $state, AuthFactory,$localStorage, userService) {
     var vm = this;
     vm.descriptionText = 'Login';
     vm.userName = '';
@@ -10,8 +10,6 @@ angular.module('inspinia')
         AuthFactory.authenticate(vm.username, vm.password)
             
             .then(function (data) {
-            
-            var dataFromStorage = $localStorage.getObject('Token','{}');
             //alert(dataFromStorage.username);
             $state.go('index.dashboards');
         });

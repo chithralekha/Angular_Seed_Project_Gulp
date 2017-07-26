@@ -6,6 +6,8 @@
         .factory('dataservice', dataservice)
         .factory('AuthFactory', AuthFactory)
         .factory('$localStorage', $localStorage)
+        .factory('userService', userService)
+        .factory('$cookieStorage', $cookieStorage)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
@@ -154,7 +156,7 @@
 
         }
 
-    }
+    }   
     
     function $localStorage($window) {
     return {
@@ -176,7 +178,26 @@
     }
     }
     
-    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage) {
+    function $cookieStorage($cookies, $location) {
+    return {
+        put: function (key, value) {
+            if ($location.host() === 'localhost') {
+                $cookies.put(key, value, {'path' : '/' });
+            }
+            else {
+                $cookies.put(key, value, {'domain' : $location.host(), 'path' : '/' });
+            }
+        },
+        get: function (key, defaultValue) {
+            return $cookies.get(key) || defaultValue;
+        },
+        remove: function (key) {
+           $cookies.remove(key);
+        }
+    }
+    }
+    
+    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieStorage) {
         
         var authFac = {},
             TOKEN_KEY = 'Token',
@@ -222,7 +243,7 @@
                 
                 userData.isAuthenticated = 'true';
                 userData.username = username;
-                userData.bearerToken = authData.access_token;
+                userData.bearerToken = authData.data.access_token;
                 userData.expirationDate = new Date(authData['.expires']);
                 
                 deferred.resolve(userData);
@@ -286,6 +307,9 @@
         function storeUserCredentials(credentials) {
             
             $localStorage.storeObject(TOKEN_KEY, credentials);
+            $cookieStorage.remove('AccessToken');
+            alert(credentials.bearerToken);
+            $cookieStorage.put('AccessToken', credentials.bearerToken)
             // Commented below code because this has been handled using $q.defer
             // useCredentials(credentials);
         }
@@ -302,6 +326,47 @@
         function sendAuthError(response) {
 
             return $q.reject('Error retrieving the AuthFac Service. (HTTP status: ' + response.status + ')');
+
+        }
+    }
+    
+    function userService ($http, $location, $q, exception, logger,config, $cookies) {
+        
+        var userProfile = {};
+        var service = {
+            getUserProfile : getUserProfile,
+            
+        }
+        return service
+        
+        function getUserProfile() {
+            //alert($cookies.get('AccessToken'));
+            var deferred = $q.defer();
+            
+            var userProfilePromise =  $http.get(config.authURL + 'user/profile', {
+                        headers: {
+                            'Authorization' : 'Bearer ' + $cookies.get('AccessToken')
+                        }
+                    });
+            $q.when(userProfilePromise)
+            .then(function (userProfileData) {
+                userProfile = userProfileData;
+                deferred.resolve(userProfile);
+            })
+            .catch(sendGetUserProfileError)
+            
+            return deferred.promise;
+        }
+        
+        function sendResponseData(response) {
+
+            return response.data;
+
+        }
+        
+        function sendGetUserProfileError(response) {
+
+            return $q.reject('Error retrieving User Profile. (HTTP status: ' + response.status + ')');
 
         }
     }

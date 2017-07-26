@@ -1,14 +1,47 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('NavigationController', function (dataservice, logger, $stateParams, AuthFactory, $localStorage) {
+    .controller('NavigationController', function (dataservice, logger, $stateParams, AuthFactory, $localStorage, USER_ROLES, userService) {
     
         var vm = this;
         var dataFromStorage = $localStorage.getObject('Token','{}');
         vm.userName = dataFromStorage.username;
         vm.helloText = 'Taskboard';
         vm.descriptionText = 'Taskboard';
-        
+        vm.userRoles = USER_ROLES;
+        vm.userData = {};
+    
+    userService.getUserProfile()
+    .then(getUserProfileSuccess, null, getUserProfileNotification)
+    .catch(errorCallback)
+    .finally(getUserProfileComplete);
+    
+    function getUserProfileSuccess(userProfile) {
+            //throw 'error in success handler';
+            vm.userData = userProfile;
+            //alert(vm.businessControlProfileList);
+        }
+
+        function getUserProfileNotification(notification) {
+            console.log('Promise Notification: ' + notification);
+        }
+    
+        function getUserProfileComplete() {
+            console.log('getUserProfile has completed');
+        }
+    
+    vm.isAuthorized = function (authorizedRoles) {
+        var isAuthorizedUser = false;
+                if (!angular.isArray(authorizedRoles)) {
+                  authorizedRoles = [authorizedRoles];
+                }
+            angular.forEach(vm.userData.roles, function (item) {
+                if(authorizedRoles.indexOf(item) !== -1) {
+                    isAuthorizedUser = true;
+                }
+            });
+        return(isAuthorizedUser)
+    };
         dataservice.getAllWorkingSets()
             .then(getWorkingSetsSuccess, null, getWorkingSetsNotification)
             .catch(errorCallback)
