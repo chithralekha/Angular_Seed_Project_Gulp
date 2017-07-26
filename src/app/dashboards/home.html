@@ -25,9 +25,9 @@
                         <chart-column column-id="{{item.name}}" column-color="{{item.color}}"
                                           column-values="{{item.workingSetCompliance}}"
                                           column-type="gauge"/>
-                        <chart-gauge min="0"
-                                         max="100"
-                                         units="Score" expand="true" label-format-function = "vm.formatValue(item.workingSetCompliance, 0)"/>
+                        <chart-gauge min="0%"
+                                         max="100%"
+                                         units="Score" expand="true" label-format-function = "vm.formatValue(item.workingSetCompliance,0)"/>
                         <chart-events on-click-data="showClick(item)"/>
                         
                     </c3chart>                    

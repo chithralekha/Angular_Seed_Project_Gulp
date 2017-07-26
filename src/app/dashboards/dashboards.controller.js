@@ -10,9 +10,8 @@ angular.module('inspinia')
         vm.descriptionText = 'Dashboard';
         
         vm.formatValue = function(value, ratio) {
-            //alert(value);
-            
-            return value;
+            var val = Math.abs(value);
+            return val;
         }
      activate();
     

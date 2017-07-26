@@ -1,22 +1,25 @@
 angular.module('inspinia')
     .controller('LoginController', function (dataservice, logger, $state, AuthFactory,$localStorage) {
-    
-        var vm = this;
-
-        vm.userName = 'Example user';
-        vm.helloText = 'Dashboard';
-        vm.descriptionText = 'Dashboard';
+    var vm = this;
+    vm.descriptionText = 'Login';
     vm.userName = '';
     vm.password = '';
-        vm.login = function() {
-            AuthFactory.authenticate(vm.username, vm.password)
+    
+    vm.login = function() {
+        
+        AuthFactory.authenticate(vm.username, vm.password)
+            
             .then(function (data) {
-                var dataFromStorage = $localStorage.getObject('Token','{}');
-                alert(dataFromStorage.username);
-                $state.go('index.dashboards');
-            });
-             
-        }
+            
+            var dataFromStorage = $localStorage.getObject('Token','{}');
+            //alert(dataFromStorage.username);
+            $state.go('index.dashboards');
+        });
+    }
+    
+    vm.logout = function() {
+        AuthFactory.logout();
+    }
     
 //     activate();
     

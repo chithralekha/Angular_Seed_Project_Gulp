@@ -193,6 +193,7 @@
         
         var authFac = {
             authenticate : authenticate,
+            logout : logout,
             getUserName : getUserName,
             getUserData : getUserData
         };
@@ -248,6 +249,20 @@
 //               storeUserCredentials({username:username, token: response.data.access_token});
 //           })
 //            .catch(sendAuthError)
+        }
+        
+        function logout () {
+            destroyUserCredentials();
+        }
+        
+        function destroyUserCredentials() {
+            
+            userData.isAuthenticated = 'false';
+            userData.username = '';
+            //userData.bearerToken = authData.access_token;
+            //userData.expirationDate = new Date(authData['.expires']);
+            //$http.defaults.headers.common['x-access-token'] = authToken;
+            $localStorage.remove(TOKEN_KEY);
         }
         
         function getUserName () {
