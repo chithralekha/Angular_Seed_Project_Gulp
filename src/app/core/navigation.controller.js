@@ -18,8 +18,8 @@ angular.module('inspinia')
     
     function getUserProfileSuccess(userProfile) {
             //throw 'error in success handler';
-            vm.userData = userProfile;
-            //alert(vm.businessControlProfileList);
+            vm.userData = userProfile.data;
+            alert(vm.userData.roles[0]);
         }
 
         function getUserProfileNotification(notification) {
@@ -40,6 +40,7 @@ angular.module('inspinia')
                     isAuthorizedUser = true;
                 }
             });
+        alert(isAuthorizedUser);
         return(isAuthorizedUser)
     };
         dataservice.getAllWorkingSets()
