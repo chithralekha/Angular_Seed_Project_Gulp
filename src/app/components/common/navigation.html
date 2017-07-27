@@ -25,7 +25,7 @@
             <li ng-class="{active: $state.includes('index.dashboards')}">
                  <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">                    
-                    <li ui-sref-active="active" ng-show = "vm.isAuthorized([userRoles.System, userRoles.Debugger, userRoles.Administrator, userRoles.QlikUser])"><a ui-sref="index.dashboards">Profiles<span class="label label-primary pull-right">NEW</span></a></li>
+                    <li ui-sref-active="active" ng-show = "vm.isAuthorized([vm.userRoles.System, vm.userRoles.Debugger, vm.userRoles.Administrator, vm.userRoles.QlikUser])"><a ui-sref="index.dashboards">Profiles<span class="label label-primary pull-right">NEW</span></a></li>
                 </ul>
             </li>
             
