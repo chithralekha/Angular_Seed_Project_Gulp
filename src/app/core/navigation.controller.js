@@ -38,7 +38,7 @@ angular.module('inspinia')
         }
 
         function getWorkingSetsNotification(notification) {
-            //console.log('Promise Notification: ' + notification);
+            console.log('Promise Notification: ' + notification);
         }
 
         function errorCallback(errorMsg) {
@@ -46,7 +46,7 @@ angular.module('inspinia')
         }
 
         function getAllWorkingSetsComplete() {
-            //console.log('getAllBooks has completed');
+            console.log('getAllWorkingSets has completed');
         }
 
 //        vm.businessControlProfileList = [
