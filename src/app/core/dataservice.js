@@ -7,7 +7,7 @@
         .factory('AuthFactory', AuthFactory)
         .factory('$localStorage', $localStorage)
         .factory('userService', userService)
-        .factory('$cookieStorage', $cookieStorage)
+        .factory('$cookieFactory', $cookieFactory)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
@@ -178,7 +178,7 @@
     }
     }
     
-    function $cookieStorage($cookies, $location) {
+    function $cookieFactory($cookies, $location) {
     return {
         put: function (key, value) {
             if ($location.host() === 'localhost') {
@@ -197,10 +197,11 @@
     }
     }
     
-    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieStorage) {
+    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieFactory) {
         
         var authFac = {},
             TOKEN_KEY = 'Token',
+            PROFILE_KEY = 'Profile',
             isAuthenticated = false,
             username = '',
             authToken = undefined;
@@ -274,6 +275,7 @@
         
         function logout () {
             destroyUserCredentials();
+            destroyUserProfile();
         }
         
         function destroyUserCredentials() {
@@ -284,6 +286,11 @@
             //userData.expirationDate = new Date(authData['.expires']);
             //$http.defaults.headers.common['x-access-token'] = authToken;
             $localStorage.remove(TOKEN_KEY);
+        }
+        
+        function destroyUserProfile() {
+            
+            $localStorage.remove(PROFILE_KEY);
         }
         
         function getUserName () {
@@ -307,9 +314,9 @@
         function storeUserCredentials(credentials) {
             
             $localStorage.storeObject(TOKEN_KEY, credentials);
-            $cookieStorage.remove('AccessToken');
-            alert(credentials.bearerToken);
-            $cookieStorage.put('AccessToken', credentials.bearerToken)
+            $cookieFactory.remove('AccessToken');
+            //alert(credentials.bearerToken);
+            $cookieFactory.put('AccessToken', credentials.bearerToken)
             // Commented below code because this has been handled using $q.defer
             // useCredentials(credentials);
         }
@@ -330,13 +337,15 @@
         }
     }
     
-    function userService ($http, $location, $q, exception, logger,config, $cookies) {
+    function userService ($http, $location, $q, exception, logger,config, $cookies, $localStorage) {
         
-        var userProfile = {};
-        var service = {
-            getUserProfile : getUserProfile,
+        var userProfile = {},
+            PROFILE_KEY = 'Profile',           
+            service = {
+                
+            getUserProfile : getUserProfile
             
-        }
+            }
         return service
         
         function getUserProfile() {
@@ -350,12 +359,20 @@
                     });
             $q.when(userProfilePromise)
             .then(function (userProfileData) {
+                
                 userProfile = userProfileData;
                 deferred.resolve(userProfile);
+                storeUserProfile(userProfile);
+                
             })
             .catch(sendGetUserProfileError)
             
             return deferred.promise;
+        }
+        
+        function storeUserProfile(userProfile) {
+            
+            $localStorage.storeObject(PROFILE_KEY, userProfile);
         }
         
         function sendResponseData(response) {

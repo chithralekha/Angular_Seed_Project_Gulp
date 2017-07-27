@@ -10,8 +10,11 @@ angular.module('inspinia')
         AuthFactory.authenticate(vm.username, vm.password)
             
             .then(function (data) {
-            //alert(dataFromStorage.username);
+            userService.getUserProfile()
+            .then(function (data) {
+                 //alert(dataFromStorage.username);
             $state.go('index.dashboards');
+            })           
         });
     }
     
