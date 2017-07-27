@@ -22,6 +22,7 @@ angular.module('inspinia')
         });
         return(isAuthorizedUser);
     };
+    
     dataservice.getAllWorkingSets()
         .then(getWorkingSetsSuccess, null, getWorkingSetsNotification)
         .catch(errorCallback)

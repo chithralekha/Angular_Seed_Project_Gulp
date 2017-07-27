@@ -3,17 +3,17 @@
 angular.module('inspinia')
     .controller('DashboardController', function (dataservice, logger, $filter) {
     
-        var vm = this;
-
-        vm.userName = 'Example user';
-        vm.helloText = 'Dashboard';
-        vm.descriptionText = 'Dashboard';
-        
-        vm.formatValue = function(value, ratio) {
-            var val = Math.abs(value);
-            return val;
-        }
-     activate();
+    var vm = this;
+    vm.userName = 'Example user';
+    vm.helloText = 'Dashboard';
+    vm.descriptionText = 'Dashboard';
+    
+    vm.formatValue = function(value, ratio) {
+        var val = Math.abs(value);
+        return val;
+    }
+    
+    activate();
     
     function activate() {
         //Following comment is from the original sorce, CleanCode by John Papa
@@ -26,6 +26,7 @@ angular.module('inspinia')
                 logger.info('Activated Dashboard View');
             });
         }
+    
     function getAllWorkingSets() {
         return dataservice.getAllWorkingSets()
             .then(function (data) {
@@ -36,5 +37,4 @@ angular.module('inspinia')
            return vm.todoList;
         });
     }
-    
-    });
+});
