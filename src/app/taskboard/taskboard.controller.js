@@ -27,7 +27,32 @@ angular.module('inspinia')
     //    };
     
     vm.sortableOptions = {
-        connectWith: ".connectList"
+        connectWith: ".connectList",
+        stop : function(e, ui) {
+            var fromIndex = ui.item.sortable.index,
+                toIndex = ui.item.sortable.dropindex,
+                itemdata = {},
+                destinationList = ui.item.sortable.droptarget.attr('ng-model');
+            console.log('Destination List = ' + destinationList);
+            
+            if(destinationList === 'vm.todoList') {
+                
+                itemdata = vm.todoList[toIndex];
+                console.log('item in todoList' + itemdata);
+            }
+            
+            if(destinationList === 'vm.inProgressList') {
+                
+                itemdata = vm.inProgressList[toIndex];
+                console.log('item in inProgressList' + itemdata.id);
+            }
+            
+            if(destinationList === 'vm.completedList') {
+                
+                itemdata = vm.completedList[toIndex];
+                console.log('item in completedList' + itemdata);
+            }
+        }
     };
     
     activate();

@@ -37,7 +37,7 @@
             $q.when(tasksPromise)
             .then(function (tasksData) {
                 
-                var allTasks = tasksData.tasks;
+                var allTasks = tasksData.taskInfos;
                 var todoList = [], inProgressList = [], completedList = [];
                 
                 allTasks.forEach(function (currentTask, index, array) {

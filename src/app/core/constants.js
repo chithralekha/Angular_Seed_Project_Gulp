@@ -7,8 +7,10 @@
         .constant('toastr', toastr)
         .constant('moment', moment)
         .constant('config', {
-        baseURL : 'http://localhost:3706/api/',
-        authURL : 'http://localhost:50443/',
+        baseURL : //'http://ec2-52-33-130-108.us-west-2.compute.amazonaws.com:8081/MagpieAPI/api/', 
+        'http://localhost:3706/api/',
+        authURL : //'http://ec2-52-33-130-108.us-west-2.compute.amazonaws.com:8081/MagpieIdentity/',
+        'http://localhost:50443/',
         //           'http://ec2-52-33-130-108.us-west-2.compute.amazonaws.com:8081/MagpieIdentity/',
         //            'http://localhost:50443/',
         //            baseURL : 'http://localhost:3706/api/',
