@@ -91,7 +91,7 @@
 
             return $http({
                 method: 'GET',
-                url: config.baseURL + 'WorkingSets/'+ bcp + '/Tasks?filterId=' + filterId
+                url: config.baseURL + 'workingSets/'+ bcp + '/TaskInfos?filterId=' + filterId
 //                headers: {
 //                    'PS-BookLogger-Version': constants.APP_VERSION
 //                },
@@ -197,7 +197,7 @@
     }
     }
     
-    function AuthFactory($resource, $rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieFactory) {
+    function AuthFactory($rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieFactory) {
         
         var authFac = {},
             TOKEN_KEY = 'Token',
