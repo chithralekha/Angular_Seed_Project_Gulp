@@ -9,6 +9,7 @@ angular.module('inspinia')
     vm.helloText = 'Taskboard';
     vm.descriptionText = 'Taskboard';
     vm.content = items;
+    
     vm.confirm = $uibModalInstance.close;
     vm.cancel = $uibModalInstance.dismiss;
     
@@ -19,10 +20,7 @@ angular.module('inspinia')
         //            var promises = [getAvengers()];
         //            return dataservice.ready(promises).then(function(){
         
-        return getTasksSummary($stateParams.bcp,$stateParams.filterText)
-                .then(function () {
-                logger.info('Activated Taskboard View');
-            });
+      
         }
     
     function getTasksSummary(bcp, filterId) {

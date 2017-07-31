@@ -78,7 +78,8 @@ angular.module('inspinia')
       var size = scope.$eval(iAttrs.size) || 'lg'; // default to large size
       var title = scope.$eval(iAttrs.title) || 'Default Title';
       var message = scope.$eval(iAttrs.message) || 'Default Message';
-      $modalFactory.open(size, title, message);
+        var id = scope.$eval(iAttrs.id) || 0;
+      $modalFactory.open(size, title, id, message);
     }
     iElement.on('click', onClick);
     scope.$on('$destroy', function() {

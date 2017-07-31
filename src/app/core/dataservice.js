@@ -198,22 +198,24 @@
     }
     }
     
-    function $modalFactory($uibModal) {
-        var open = function (size, title, message) {
+    function $modalFactory($uibModal, $http, $q, config, $cookies) {
+        var open = function (size, title, id, message) {
+            //alert(id);
             return $uibModal.open({
                 controller: 'TaskAddEditModalController',
                 controllerAs: 'vm',
                 templateUrl : 'app/taskboard/taskAddEditModal.html',
-                size: 'lg',
+                size: size,
                 windowClass: 'app-modal-window',
                 backdrop :'static',
                 keyboard :false,
                 resolve: {
                     items: function() {
-                        return {
-                            title: title,
-                            message: message
-                        };
+                        return $http.get(config.baseURL + 'Tasks/' + id, { headers: {'Authorization' : 'Bearer ' + $cookies.get('AccessToken')}})
+                            .then(function (response) {
+                            //alert(response.data);
+                            return response.data;
+                        })
                     }
                 }
             });
