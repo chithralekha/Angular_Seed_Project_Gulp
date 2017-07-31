@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state) {
+    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state, $uibModal, $scope) {
     
     var vm = this;
     
@@ -54,6 +54,17 @@ angular.module('inspinia')
             }
         }
     };
+//    vm.open = function() {
+//        var modalInstance = $uibModal.open( {
+//            controller: 'TaskAddEditModalController',
+//            controllerAs : 'vm',
+//            templateUrl : 'app/taskboard/taskAddEditModal.html',
+//            size : 'lg',
+//            windowClass: 'app-modal-window',
+//            backdrop :'static',
+//            keyboard :false
+//        });
+//    }
     
     activate();
     

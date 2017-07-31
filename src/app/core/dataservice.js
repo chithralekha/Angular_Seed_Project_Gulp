@@ -205,6 +205,9 @@
                 controllerAs: 'vm',
                 templateUrl : 'app/taskboard/taskAddEditModal.html',
                 size: size,
+                windowClass: 'app-modal-window',
+                backdrop :'static',
+                keyboard :false,
                 resolve: {
                     items: function() {
                         return {

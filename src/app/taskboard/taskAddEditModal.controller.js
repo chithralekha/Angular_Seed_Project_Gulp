@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskAddEditModalController', function ($uibModalInstance, items,dataservice, taskDueStatusClassService, logger, $stateParams, $state) {
+    .controller('TaskAddEditModalController', function ($uibModalInstance, items, dataservice, taskDueStatusClassService, logger, $stateParams, $state) {
     
     var vm = this;
     
