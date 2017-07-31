@@ -8,6 +8,7 @@
         .factory('$localStorage', $localStorage)
         .factory('userService', userService)
         .factory('$cookieFactory', $cookieFactory)
+        .factory('$modalFactory', $modalFactory)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
         });
@@ -195,6 +196,29 @@
            $cookies.remove(key);
         }
     }
+    }
+    
+    function $modalFactory($uibModal) {
+        var open = function (size, title, message) {
+            return $uibModal.open({
+                controller: 'TaskAddEditModalController',
+                controllerAs: 'vm',
+                templateUrl : 'app/taskboard/taskAddEditModal.html',
+                size: size,
+                resolve: {
+                    items: function() {
+                        return {
+                            title: title,
+                            message: message
+                        };
+                    }
+                }
+            });
+        };
+        
+        return {
+            open: open
+        };
     }
     
     function AuthFactory($rootScope, $http, $location, $q, exception, logger, config, $localStorage, $cookieFactory) {

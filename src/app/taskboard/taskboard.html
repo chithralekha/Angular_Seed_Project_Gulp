@@ -20,6 +20,9 @@
                     <button ng-click="vm.reload()" class="fa fa-refresh hidden">
                       Reload
                     </button>
+                    <button modal-trigger size="'sm'" title="'Hello World!'" message="'This is a test'">
+                        Click Me
+                    </button>
                     <p class="small"><i class="fa fa-hand-o-up"></i> Drag task between list</p>
                     <div class="input-group">
                         <input type="text" placeholder="Add new task. " class="input input-sm form-control" ng-model="taskTitle">
@@ -30,7 +33,7 @@
                     <ul ui-sortable="vm.sortableOptions" class="sortable-list connectList agile-list" ng-model="vm.todoList">
                         <li ng-class="vm.taskDueStatusClass(task)" ng-repeat="task in vm.todoList">
                             <div class="agile-detail">
-                                <button type="button"  ng-click = "openTaskDetailsDialog(task)" class="btn btn-w-m btn-xs btn-link">{{task.title}} </button>
+                                <button type="button"  modal-trigger size="'sm'" title="'{{task.title}}'" message="'This is a test'" class="btn btn-w-m btn-xs btn-link">{{task.title}} </button>
                                 <p class="pull-right"><i class="fa fa-clock-o"></i>{{task.due|date}}</p>
                             </div>
                             <div class="agile-detail">

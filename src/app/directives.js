@@ -70,6 +70,22 @@ angular.module('inspinia')
             $rootScope.$on('$stateChangeStart', listener);
         }
     }
+})
+.directive('modalTrigger', function($modalFactory) {
+  return {
+    link: function(scope, iElement, iAttrs) {
+    function onClick() {
+      var size = scope.$eval(iAttrs.size) || 'lg'; // default to large size
+      var title = scope.$eval(iAttrs.title) || 'Default Title';
+      var message = scope.$eval(iAttrs.message) || 'Default Message';
+      $modalFactory.open(size, title, message);
+    }
+    iElement.on('click', onClick);
+    scope.$on('$destroy', function() {
+      iElement.off('click', onClick);
+    });
+  }
+  };
 });
 
 
