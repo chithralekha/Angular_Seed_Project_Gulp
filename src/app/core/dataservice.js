@@ -204,7 +204,7 @@
                 controller: 'TaskAddEditModalController',
                 controllerAs: 'vm',
                 templateUrl : 'app/taskboard/taskAddEditModal.html',
-                size: size,
+                size: 'lg',
                 windowClass: 'app-modal-window',
                 backdrop :'static',
                 keyboard :false,
