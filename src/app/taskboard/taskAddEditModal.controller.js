@@ -12,7 +12,7 @@ angular.module('inspinia')
     vm.confirm = $uibModalInstance.close;
     vm.cancel = $uibModalInstance.dismiss;
     
-    activate();
+    //activate();
     function activate() {
         //Following comment is from the original sorce, CleanCode by John Papa
         //            Using a resolver on all routes or dataservice.ready in every controller
