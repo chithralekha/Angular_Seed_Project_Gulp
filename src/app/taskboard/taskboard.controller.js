@@ -30,7 +30,7 @@ angular.module('inspinia')
         if(task.taskState.name === 'New') {
             angular.forEach(vm.todoList, function (item) {
                 if(item.id === task.id) {
-                    item.title = 'Title Changed';
+                    item.title = task.title;
                 }
             })
         }

@@ -160,7 +160,7 @@
         
         function saveTask(task) {
             alert(task.title);
-            task.title = 'Policy Control 1 Task1';
+            //task.title = 'Policy Control 1 Task1';
             $http.put(config.baseURL + 'Tasks/' + task.id, task);
             alert('success');
         }
