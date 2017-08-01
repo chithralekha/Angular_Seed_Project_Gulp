@@ -9,8 +9,22 @@ angular.module('inspinia')
     vm.helloText = 'Taskboard';
     vm.descriptionText = 'Taskboard';
     vm.content = items;
+    vm.taskStates = {};
+    vm.taskStates.Values = [
+                { Name : 'In Progress', Value : 2 },
+                { Name : 'New', Value : 1 },
+                { Name : 'Completed', Value : 3 }];
     
-     $scope.$on('task:updated', function (event, task) {
+    vm.controlSets = {};
+    vm.controlSets.Values = [];
+    var controls = dataservice.getAllControlSets()
+    .then(function (data) {
+        angular.forEach(data, function (item) {
+            vm.controlSets.Values.push({ Name : item.code, Value : item.id});
+        });
+    });
+    
+    $scope.$on('task:updated', function (event, task) {
            // alert(task.id);
         });
     
@@ -22,6 +36,22 @@ angular.module('inspinia')
     }
         
     vm.cancel = $uibModalInstance.dismiss;
+    
+    vm.updateTaskState = function (taskStateId) {
+        vm.content.taskState.id = taskStateId;
+    }
+    
+    vm.updateControlSet = function (controlSetId) {
+        alert(controlSetId);
+    }
+    
+    vm.enableStatus = function(task) {
+        return task === undefined || task.id === 0;
+    };
+    
+    vm.enableControlStatus = function(task) {
+        return task !== undefined && task.id !== 0;
+    };
     
     //activate();
     function activate() {

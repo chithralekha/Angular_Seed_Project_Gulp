@@ -24,7 +24,8 @@
             getAllTasks : getAllTasks,
             getAllWorkingSets : getAllWorkingSets,
             getAllFilters : getAllFilters,
-            saveTask : saveTask
+            saveTask : saveTask,
+            getAllControlSets : getAllControlSets
             
         };
 
@@ -89,6 +90,20 @@
             return deferred.promise;
         }
         
+        function getAllControlSets() {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'Controls'
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
+            .then(sendResponseData)
+            .catch(sendGetControlSetsError)
+        }
+        
         function getAllTasks(bcp, filterId) {
 
             return $http({
@@ -114,6 +129,12 @@
         function sendGetTasksError(response) {
 
             return $q.reject('Error retrieving Tasks. (HTTP status: ' + response.status + ')');
+
+        }
+        
+        function sendGetControlSetsError(response) {
+
+            return $q.reject('Error retrieving ControlSets. (HTTP status: ' + response.status + ')');
 
         }
         
