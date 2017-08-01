@@ -25,7 +25,16 @@ angular.module('inspinia')
     //                break;
     //        }
     //    };
-    
+    $scope.$on('task:updated', function (event, task) {
+            alert('From Parent  ..' + task.id + 'Task State=' + task.taskState.name);
+        if(task.taskState.name === 'New') {
+            angular.forEach(vm.todoList, function (item) {
+                if(item.id === task.id) {
+                    item.title = 'Title Changed';
+                }
+            })
+        }
+        })
     vm.sortableOptions = {
         connectWith: ".connectList",
         stop : function(e, ui) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskAddEditModalController', function ($uibModalInstance, items, dataservice, taskDueStatusClassService, logger, $stateParams, $state) {
+    .controller('TaskAddEditModalController', function ($uibModalInstance, items, dataservice, taskDueStatusClassService, logger, $stateParams, $state, $scope, $rootScope) {
     
     var vm = this;
     
@@ -10,8 +10,13 @@ angular.module('inspinia')
     vm.descriptionText = 'Taskboard';
     vm.content = items;
     
+     $scope.$on('task:updated', function (event, task) {
+           // alert(task.id);
+        });
+    
     vm.confirm = function() {
         dataservice.saveTask(vm.content);
+        $rootScope.$broadcast('task:updated', vm.content);
         $uibModalInstance.close();
     }
         
