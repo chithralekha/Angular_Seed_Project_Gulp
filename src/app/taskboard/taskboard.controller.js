@@ -31,6 +31,11 @@ angular.module('inspinia')
             angular.forEach(vm.todoList, function (item) {
                 if(item.id === task.id) {
                     item.title = task.title;
+                    item.code = task.code;
+                    var index = vm.todoList.indexOf(item);
+                    var copy = angular.copy(vm.todoList[index]);
+                    copy.dueStatus.status = 'Overdue';
+                    vm.todoList[index] = copy;
                 }
             })
         }

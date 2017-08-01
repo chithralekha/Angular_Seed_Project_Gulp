@@ -15,7 +15,7 @@ angular.module('inspinia')
         });
     
     vm.confirm = function() {
-        vm.content.title = 'Policy Control 1 Task2';
+        //vm.content.title = 'Policy Control 1 Task2';
         dataservice.saveTask(vm.content);
         $rootScope.$broadcast('task:updated', vm.content);
         $uibModalInstance.close();

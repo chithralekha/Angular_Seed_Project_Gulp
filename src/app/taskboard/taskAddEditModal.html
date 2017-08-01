@@ -5,13 +5,21 @@
     <div class = "row">
         <div class = "row">
             <div class = "col-lg-2" style="font-size : 12px; padding-top : 8px"> 
-                <input type="text" style="font-size : 12px; padding-top : 8px" class="form-control no-border" name="TaskCode" ng-model="dialogTask.code"  placeholder="Code" required />
-              
+                <input type="text" style="font-size : 12px; padding-top : 8px" class="form-control no-border" name="TaskCode" ng-model="vm.content.code"  placeholder="Code" required ng-minlength="3" />
+                <div class="m-t-xs" ng-show="signup_form2.TaskCode.$invalid && signup_form2.TaskCode.$dirty">
+                    <small class="text-danger" ng-show="signup_form2.TaskCode.$error.required">Please input a Task Code</small>
+                    <small class="text-danger" ng-show="signup_form2.TaskCode.$error.minlength">Your Task Code is required to be at least 3 characters</small>
+                    <small class="text-danger" ng-show="signup_form2.TaskCode.$error.maxlength">Your Task Code cannot be longer than 20 characters</small>
+                </div>
             </div>
             
             <div class = "col-lg-9" style="font-weight:bold;">
-                <input type="text" style="font-size:25px" class="form-control no-border" name="TaskTitle" ng-model="dialogTask.title"  placeholder="Task Title" required />
-                
+                <input type="text" style="font-size:25px" class="form-control no-border" name="TaskTitle" ng-model="vm.content.title"  placeholder="Task Title" required ng-minlength="3" />
+                <div class="m-t-xs" ng-show="signup_form2.TaskTitle.$invalid && signup_form2.TaskTitle.$dirty">
+                    <small class="text-danger" style="font-weight:normal;" ng-show="signup_form2.TaskTitle.$error.required">Please input a Task Title</small>
+                    <small class="text-danger" ng-show="signup_form2.TaskTitle.$error.minlength">Your Task Title is required to be at least 3 characters</small>
+                    <small class="text-danger" ng-show="signup_form2.TaskTitle.$error.maxlength">Your Task Title cannot be longer than 20 characters</small>
+                </div>
             </div>
             <div class="col-lg-1 pull-right">
                 <button type="button" class="close" ng-click="vm.cancel()">X</button>
@@ -19,17 +27,17 @@
         </div>
         <div class="row">
             
-            <div class="col-lg-4 hidden">                
+            <div class="col-lg-4 hidden">
+              
             </div>
-            
             <div class="col-lg-4">
-            </div>
             
+            </div>
             <div class = "col-lg-2 pull-right">
-            <button type="button" class="btn btn-info pull-right" ng-click="vm.confirm()"><i class="fa fa-save"></i> Save</button></div> 
+            <button type="button" class="btn btn-info pull-right" ng-click="vm.confirm()" ng-disabled="signup_form2.$invalid"><i class="fa fa-save"></i> Save</button></div> 
         </div>
 </div>
-    </div>
+</div>
     <div class="modal-body">
     <div class="row">
         <div class="col-lg-12">
@@ -66,24 +74,18 @@
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Due</label>
                                     <div class = "col-md-6">
-                                        <input type="text" class="form-control no-border" name="taskDue" ng-model="dialogTask.due"  placeholder="Task Due" formatted-date format="medium"/>
+                                        <input type="text" class="form-control no-border" name="taskDue" ng-model="vm.content.due"  placeholder="Task Due" formatted-date format="medium"/>
                                         <div class="m-t-xs" ng-show="signup_form2.taskDue.$invalid && signup_form2.taskDue.$dirty">
                                             <small class="text-danger" style="font-weight:normal;" ng-show="signup_form2.taskDue.$error.date">Please input a valid date</small>
                                             <small class="text-danger" ng-show="signup_form2.taskDue.$error.minlength">Your Task Due is required to be at least 3 characters</small>
                                             <small class="text-danger" ng-show="signup_form2.taskDue.$error.maxlength">Your Task Due cannot be longer than 20 characters</small>
                                         </div>
                                     </div>
-                                </div>
-                                <div class = "form-group hidden">
-                                    <label class = "col-md-2 control-label">Created By</label>
-                                    <div class = "col-md-10">
-                                        <input type="text" class="form-control no-border" name="CreatedBy" ng-model="dialogTask.createdByUserId"  placeholder="Created By" required />
-                                    </div>
-                                </div>
+                                </div>                                
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Link</label>
                                     <div class = "col-md-6">
-                                        <input type="text" class="form-control no-border" name="Link" ng-model="dialogTask.link"  placeholder="Link" />
+                                        <input type="text" class="form-control no-border" name="Link" ng-model="vm.content.link"  placeholder="Link" />
                                     </div>
                                 </div>
                                 <div class = "form-group">
