@@ -10,7 +10,11 @@ angular.module('inspinia')
     vm.descriptionText = 'Taskboard';
     vm.content = items;
     
-    vm.confirm = $uibModalInstance.close;
+    vm.confirm = function() {
+        dataservice.saveTask(vm.content);
+        $uibModalInstance.close();
+    }
+        
     vm.cancel = $uibModalInstance.dismiss;
     
     //activate();

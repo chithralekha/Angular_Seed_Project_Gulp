@@ -23,7 +23,8 @@
             getTasksSummary : getTasksSummary,
             getAllTasks : getAllTasks,
             getAllWorkingSets : getAllWorkingSets,
-            getAllFilters : getAllFilters
+            getAllFilters : getAllFilters,
+            saveTask : saveTask
             
         };
 
@@ -155,6 +156,13 @@
 
             return $q.reject('Error retrieving Filters. (HTTP status: ' + response.status + ')');
 
+        }
+        
+        function saveTask(task) {
+            alert(task.title);
+            task.title = 'Policy Control 1 Task1';
+            $http.put(config.baseURL + 'Tasks/' + task.id, task);
+            alert('success');
         }
 
     }   
