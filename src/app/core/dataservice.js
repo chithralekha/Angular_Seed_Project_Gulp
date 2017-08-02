@@ -25,7 +25,9 @@
             getAllWorkingSets : getAllWorkingSets,
             getAllFilters : getAllFilters,
             saveTask : saveTask,
-            getAllControlSets : getAllControlSets
+            getAllControlSets : getAllControlSets,
+            getAllRACITeams : getAllRACITeams,
+            getAllUsers : getAllUsers
             
         };
 
@@ -104,6 +106,34 @@
             .catch(sendGetControlSetsError)
         }
         
+        function getAllRACITeams() {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'raciteams'
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
+            .then(sendResponseData)
+            .catch(sendGetRACITeamsError)
+        }
+        
+        function getAllUsers() {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'Users'
+//                headers: {
+//                    'PS-BookLogger-Version': constants.APP_VERSION
+//                },
+//                transformResponse: transformGetBooks,
+//                cache: true
+            })
+            .then(sendResponseData)
+            .catch(sendGetUsersError)
+        }
+        
         function getAllTasks(bcp, filterId) {
 
             return $http({
@@ -135,6 +165,18 @@
         function sendGetControlSetsError(response) {
 
             return $q.reject('Error retrieving ControlSets. (HTTP status: ' + response.status + ')');
+
+        }
+        
+        function sendGetRACITeamsError(response) {
+
+            return $q.reject('Error retrieving RACITeams. (HTTP status: ' + response.status + ')');
+
+        }
+        
+        function sendGetUsersError(response) {
+
+            return $q.reject('Error retrieving ResponsibleUsers. (HTTP status: ' + response.status + ')');
 
         }
         

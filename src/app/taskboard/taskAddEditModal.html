@@ -160,27 +160,27 @@
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">RACI Team</label>
                                     <div class = "col-md-6">
-                                         <select class="form-control m-b" ng-model="raciTeams.Value" ng-options="raciTeam.Value as raciTeam.Name for raciTeam  in raciTeams.Values" ng-change="updateRaciTeam(raciTeams.Value)" ng-disabled = "raci.name == 'Role'"></select>
+                                         <select class="form-control m-b" ng-model="raciTeams.Value" ng-options="raciTeam.Value as raciTeam.Name for raciTeam  in vm.raciTeams.Values" ng-change="vm.updateRaciTeam(raciTeams.Value)" ng-disabled = "raci.name == 'Role'"></select>
                                     </div>
                                 </div>
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Responsible</label>
                                     <div class = "col-md-6">
-                                         <select class="form-control m-b" ng-model="responsibleUsers.Value" ng-options="responsibleUser.Value as responsibleUser.Name for responsibleUser  in responsibleUsers.Values" ng-change="updateResponsibleUser(responsibleUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
+                                         <select class="form-control m-b" ng-model="vm.responsibleUsers.Value" ng-options="responsibleUser.Value as responsibleUser.Name for responsibleUser  in vm.responsibleUsers.Values" ng-change="vm.updateResponsibleUser(responsibleUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
                                     </div>
                                 </div>
                                 
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Accountable</label>
                                     <div class = "col-md-6">
-                                          <select class="form-control m-b" ng-model="accountableUsers.Value" ng-options="accountableUser.Value as accountableUser.Name for accountableUser  in accountableUsers.Values" ng-change="updateAccountableUser(accountableUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
+                                          <select class="form-control m-b" ng-model="accountableUsers.Value" ng-options="accountableUser.Value as accountableUser.Name for accountableUser  in vm.accountableUsers.Values" ng-change="vm.updateAccountableUser(accountableUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
                                     </div>
                                 </div>
                                 
                                 <div class = "form-group">
                                     <uib-accordion close-others="true">                                        
                                         <uib-accordion-group heading="Informed" is-open="true">
-                                           <select multiple class="form-control m-b" ng-model="informedUsers.Value" ng-options="informedUser.Value as informedUser.Name for informedUser  in informedUsers.Values" ng-change="updateInformedUser(informedUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
+                                           <select multiple class="form-control m-b" ng-model="informedUsers.Value" ng-options="informedUser.Value as informedUser.Name for informedUser  in vm.informedUsers.Values" ng-change="vm.updateInformedUser(informedUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
                                         </uib-accordion-group>
                                     </uib-accordion>
                                 </div>
@@ -191,7 +191,7 @@
                             <br>
                             <uib-accordion close-others="true">
                                 <uib-accordion-group heading="Consulted" is-open="true">
-                                   <select multiple class="form-control m-b" ng-model="consultedUsers.Value" ng-options="consultedUser.Value as consultedUser.Name for consultedUser  in consultedUsers.Values" ng-change="updateConsultedUser(consultedUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
+                                   <select multiple class="form-control m-b" ng-model="consultedUsers.Value" ng-options="consultedUser.Value as consultedUser.Name for consultedUser  in vm.consultedUsers.Values" ng-change="vm.updateConsultedUser(consultedUsers.Value)" ng-disabled = "raci.name == 'Team'"></select>
                                 </uib-accordion-group>
                             </uib-accordion>
                             </div>

@@ -17,13 +17,48 @@ angular.module('inspinia')
     
     vm.controlSets = {};
     vm.controlSets.Values = [];
+    
+    vm.responsibleUsers = {};
+    vm.responsibleUsers.Values = [];
+    
+    vm.accountableUsers = {};
+    vm.accountableUsers.Values = [];
+    vm.informedUsers = {};
+    vm.informedUsers.Values = [];
+    vm.consultedUsers = {};
+    vm.consultedUsers.Values = [];
+    
+    vm.raciTeams = {};
+    vm.raciTeams.Values = [];
+    vm.raciTeamList = [];
+    
     var controls = dataservice.getAllControlSets()
     .then(function (data) {
         angular.forEach(data, function (item) {
             vm.controlSets.Values.push({ Name : item.code, Value : item.id});
         });
     });
+    var raciTeams = dataservice.getAllRACITeams()
+    .then(function (data) {
+        console.log('Raci users data...', data.length);
+        vm.raciTeamList = data;
+        angular.forEach(data, function (item) {
+            vm.raciTeams.Values.push({ Name : item.name, Value : item.id});
+        });
+    });
+    var users = dataservice.getAllUsers()
+    .then(function (data) {
+        console.log('Responsible users data...', data.length);
+        angular.forEach(data, function (item) {
+            vm.responsibleUsers.Values.push({ Name : item.userName, Value : item.id});
+            vm.accountableUsers.Values.push({ Name : item.userName, Value : item.id});
+            vm.informedUsers.Values.push({ Name : item.userName, Value : item.id});
+            vm.consultedUsers.Values.push({ Name : item.userName, Value : item.id});
+        });
+    });
     
+    vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
+    alert(vm.responsibleUsers.Value);
     $scope.$on('task:updated', function (event, task) {
            // alert(task.id);
         });
