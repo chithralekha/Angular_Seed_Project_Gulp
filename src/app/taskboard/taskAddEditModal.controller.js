@@ -32,6 +32,8 @@ angular.module('inspinia')
     vm.raciTeams.Values = [];
     vm.raciTeamList = [];
     
+    var informedUsers =[], consultedUsers =[];
+    
     var controls = dataservice.getAllControlSets()
     .then(function (data) {
         angular.forEach(data, function (item) {
@@ -58,7 +60,16 @@ angular.module('inspinia')
     });
     
     vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
-    alert(vm.responsibleUsers.Value);
+    vm.accountableUsers.Value = vm.content.raciTeam.accountableUser.id;
+    
+    angular.forEach(vm.content.raciTeam.informedUsers, function (item) {
+        informedUsers.push(item.id);
+        vm.informedUsers.Value = informedUsers; });
+    angular.forEach(vm.content.raciTeam.consultedUsers, function (item) {
+        consultedUsers.push(item.id);
+        vm.consultedUsers.Value = consultedUsers; });
+    
+    //alert(vm.responsibleUsers.Value);
     $scope.$on('task:updated', function (event, task) {
            // alert(task.id);
         });
