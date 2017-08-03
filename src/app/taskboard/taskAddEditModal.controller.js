@@ -59,8 +59,23 @@ angular.module('inspinia')
         });
     });
     
-    vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
-    vm.accountableUsers.Value = vm.content.raciTeam.accountableUser.id;
+       
+    if(!angular.isUndefined(vm.content.raciTeam.responsibleUser) && vm.content.raciTeam.responsibleUser !== null)
+        {
+            if(vm.content.raciTeam.responsibleUser.id !== null)
+                {
+                    vm.responsibleUsers.Value = {Name : vm.content.raciTeam.responsibleUser.userName, Value : vm.content.raciTeam.responsibleUser.id };
+                }
+        }
+    
+    if(!angular.isUndefined(vm.content.raciTeam.accountableUser) && vm.content.raciTeam.accountableUser !== null )
+        {
+            if(vm.content.raciTeam.accountableUser.id !== null)
+                {
+                    vm.accountableUsers.Value = vm.content.raciTeam.accountableUser.id;
+                }
+        }
+    
     
     angular.forEach(vm.content.raciTeam.informedUsers, function (item) {
         informedUsers.push(item.id);
@@ -89,6 +104,15 @@ angular.module('inspinia')
     
     vm.updateControlSet = function (controlSetId) {
         alert(controlSetId);
+    }
+    
+    vm.updateResponsibleUser = function (responsibleUser)
+    {
+        alert(responsibleUser.Name);
+        if(vm.content.raciTeam.responsibleUser === null) {
+            vm.content.raciTeam.responsibleUser = {id : responsibleUser.Value, userName : responsibleUser.Name}
+        }
+        else vm.content.raciTeam.responsibleUser = {id :responsibleUser.Value, userName : responsibleUser.Name}
     }
     
     vm.enableStatus = function(task) {
