@@ -166,8 +166,7 @@
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Responsible</label>
                                     <div class = "col-md-6">
-                                         <select class="form-control m-b" ng-model="vm.responsibleUser" ng-options="responsibleUser as responsibleUser.Name for responsibleUser  in vm.responsibleUsers.Values" ng-change="vm.updateResponsibleUser(vm.responsibleUser)" ng-disabled = "vm.raci.name == 'Team'">
-                                         <option value ="">Select Responsible User</option>
+                                         <select class="form-control m-b" ng-model="vm.responsibleUsers.Value" ng-options="responsibleUser.Value as responsibleUser.Name for responsibleUser  in vm.responsibleUsers.Values" ng-change="vm.updateResponsibleUser(vm.responsibleUsers.Value)" ng-disabled = "vm.raci.name == 'Team'">
                                         </select>
                                     </div>
                                 </div>

@@ -64,7 +64,7 @@ angular.module('inspinia')
         {
             if(vm.content.raciTeam.responsibleUser.id !== null)
                 {
-                    vm.responsibleUsers.Value = {Name : vm.content.raciTeam.responsibleUser.userName, Value : vm.content.raciTeam.responsibleUser.id };
+                    vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
                 }
         }
     
@@ -108,11 +108,12 @@ angular.module('inspinia')
     
     vm.updateResponsibleUser = function (responsibleUser)
     {
-        alert(responsibleUser.Name);
+        alert(responsibleUser);
+        alert(vm.responsibleUsers.Values.indexOf(responsibleUser));
         if(vm.content.raciTeam.responsibleUser === null) {
-            vm.content.raciTeam.responsibleUser = {id : responsibleUser.Value, userName : responsibleUser.Name}
+            vm.content.raciTeam.responsibleUser = {id : responsibleUser};
         }
-        else vm.content.raciTeam.responsibleUser = {id :responsibleUser.Value, userName : responsibleUser.Name}
+        else vm.content.raciTeam.responsibleUser = {id :responsibleUser};
     }
     
     vm.enableStatus = function(task) {
