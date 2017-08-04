@@ -64,7 +64,8 @@ angular.module('inspinia')
         {
             if(vm.content.raciTeam.responsibleUser.id !== null)
                 {
-                    vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
+                    vm.responsibleUsers.Value =  vm.content.raciTeam.responsibleUser.id;
+                   
                 }
         }
     
@@ -108,12 +109,32 @@ angular.module('inspinia')
     
     vm.updateResponsibleUser = function (responsibleUser)
     {
-        alert(responsibleUser);
-        alert(vm.responsibleUsers.Values.indexOf(responsibleUser));
-        if(vm.content.raciTeam.responsibleUser === null) {
-            vm.content.raciTeam.responsibleUser = {id : responsibleUser};
-        }
-        else vm.content.raciTeam.responsibleUser = {id :responsibleUser};
+        var userName = vm.responsibleUsers.Values.find(function(user) {
+            return user.Value === responsibleUser;
+        }).Name;
+        vm.content.raciTeam.responsibleUser = {id :responsibleUser, userName : userName};
+    }
+    vm.updateAccountableUser = function (accountableUser)
+    {
+        vm.content.raciTeam.accountableUser = {id :accountableUser};
+    }
+    vm.updateConsultedUsers = function (users)
+    {
+        var consultedUsers = [];
+            angular.forEach(users, function (user) {
+                if(users.indexOf({id : user}) === -1)
+                consultedUsers.push({id : user});
+            }); 
+        vm.content.raciTeam.consultedUsers = consultedUsers;  
+    }
+    vm.updateInformedUsers = function (users)
+    {
+        var informedUsers = [];
+            angular.forEach(users, function (user) {
+                if(consultedUsers.indexOf({id : user}) === -1)
+                informedUsers.push({id : user});
+            }); 
+        vm.content.raciTeam.informedUsers = informedUsers;  
     }
     
     vm.enableStatus = function(task) {

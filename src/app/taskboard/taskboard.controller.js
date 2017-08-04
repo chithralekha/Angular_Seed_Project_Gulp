@@ -32,6 +32,7 @@ angular.module('inspinia')
                 if(item.id === task.id) {
                     item.title = task.title;
                     item.code = task.code;
+                    item.responsibleUser.userName = task.raciTeam.responsibleUser.userName;
                     var index = vm.todoList.indexOf(item);
                     var copy = angular.copy(vm.todoList[index]);
                     copy.dueStatus.status = 'Overdue';
