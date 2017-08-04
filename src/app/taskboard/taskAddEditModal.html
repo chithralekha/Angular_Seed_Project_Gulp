@@ -160,13 +160,13 @@
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">RACI Team</label>
                                     <div class = "col-md-6">
-                                         <select class="form-control m-b" ng-model="vm.raciTeams.Value" ng-options="raciTeam.Value as raciTeam.Name for raciTeam  in vm.raciTeams.Values" ng-change="vm.updateRaciTeam(raciTeams.Value)" ng-disabled = "vm.raci.name == 'Role'"></select>
+                                         <select class="form-control m-b" ng-model="vm.raciTeams.Value" ng-options="raciTeam.Value as raciTeam.Name for raciTeam  in vm.raciTeams.Values" ng-change="vm.updateRaciTeam(vm.raciTeams.Value)" ng-disabled = "vm.raci.name == 'Role'"></select>
                                     </div>
                                 </div>
                                 <div class = "form-group">
                                     <label class = "col-md-4 control-label" style="padding-top : 10px">Responsible</label>
                                     <div class = "col-md-6">
-                                         <select class="form-control m-b" ng-model="vm.responsibleUsers.Value" ng-options="responsibleUser.Value as responsibleUser.Name for responsibleUser  in vm.responsibleUsers.Values"   ng-change="vm.updateResponsibleUser(vm.responsibleUsers.Value)" >
+                                         <select class="form-control m-b" ng-model="vm.responsibleUsers.Value" ng-options="responsibleUser.Value as responsibleUser.Name for responsibleUser  in vm.responsibleUsers.Values"   ng-change="vm.updateResponsibleUser(vm.responsibleUsers.Value)" ng-disabled = "vm.raci.name == 'Team'">
                                         </select>
                                         
                                     </div>
