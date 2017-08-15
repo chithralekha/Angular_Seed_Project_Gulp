@@ -8,7 +8,11 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('index.taskboard', {
+    .state('taskboard', {
+        abstract: true,
+        templateUrl: "app/components/common/content.html"
+      })
+      .state('taskboard.taskboard', {
         url: "/taskboard/:filterText?bcp",
         templateUrl: "app/taskboard/taskboard.html",
         data: { pageTitle: 'Taskboard' },
