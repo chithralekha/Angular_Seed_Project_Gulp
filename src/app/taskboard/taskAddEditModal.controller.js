@@ -5,9 +5,7 @@ angular.module('inspinia')
     
     var vm = this;
     
-    vm.userName = 'Example user';
-    vm.helloText = 'Taskboard';
-    vm.descriptionText = 'Taskboard';
+
     vm.content = items;
     vm.taskStates = {};
     vm.taskStates.Values = [
@@ -33,6 +31,7 @@ angular.module('inspinia')
     vm.raciTeamList = [];
     
     var informedUsers =[], consultedUsers =[];
+    vm.raci ={name :'Team'};
     
     var controls = dataservice.getAllControlSets()
     .then(function (data) {
@@ -64,7 +63,8 @@ angular.module('inspinia')
         {
             if(vm.content.raciTeam.responsibleUser.id !== null)
                 {
-                    vm.responsibleUsers.Value = vm.content.raciTeam.responsibleUser.id;
+                    vm.responsibleUsers.Value =  vm.content.raciTeam.responsibleUser.id;
+                   
                 }
         }
     
@@ -108,14 +108,59 @@ angular.module('inspinia')
     
     vm.updateResponsibleUser = function (responsibleUser)
     {
-        alert(responsibleUser);
-        alert(vm.responsibleUsers.Values.indexOf(responsibleUser));
-        if(vm.content.raciTeam.responsibleUser === null) {
-            vm.content.raciTeam.responsibleUser = {id : responsibleUser};
-        }
-        else vm.content.raciTeam.responsibleUser = {id :responsibleUser};
+        var userName = vm.responsibleUsers.Values.find(function(user) {
+            return user.Value === responsibleUser;
+        }).Name;
+        vm.content.raciTeam.responsibleUser = {id :responsibleUser, userName : userName};
     }
-    
+    vm.updateAccountableUser = function (accountableUser)
+    {
+        vm.content.raciTeam.accountableUser = {id :accountableUser};
+    }
+    vm.updateConsultedUsers = function (users)
+    {
+        var consultedUsers = [];
+            angular.forEach(users, function (user) {
+                if(users.indexOf({id : user}) === -1)
+                consultedUsers.push({id : user});
+            }); 
+        vm.content.raciTeam.consultedUsers = consultedUsers;  
+    }
+    vm.updateInformedUsers = function (users)
+    {
+        var informedUsers = [];
+            angular.forEach(users, function (user) {
+                if(consultedUsers.indexOf({id : user}) === -1)
+                informedUsers.push({id : user});
+            }); 
+        vm.content.raciTeam.informedUsers = informedUsers;  
+    }
+    vm.updateRaciTeam = function (raciTeam) {
+        
+        angular.forEach(vm.raciTeamList, function (raci) {
+           if(raci.id == raciTeam ) {
+               alert(raci.id);
+               vm.content.raciTeam.responsibleUser = {id : raci.responsibleUser.id, userName : raci.responsibleUser.userName};
+               vm.content.raciTeam.accountableUser = {id :raci.accountableUser.id,};
+               var raciInformed = [];
+               angular.forEach(raci.informedUsers, function (user) {
+               raciInformed.push({id : user}.id);
+            });
+             var raciConsulted = [];
+               angular.forEach(raci.consultedUsers, function (user) {
+               raciConsulted.push({id : user.id});
+            });
+               vm.content.raciTeam.informedUsers = raciInformed;
+               vm.content.raciTeam.consultedUsers = raciConsulted;
+               
+           }
+          // alert('responsible user:' + $scope.responsibleUserSelected.id);
+          // alert('accountable user:' + $scope.accountableUserSelected.id);
+          // alert('informed user:' + $scope.informedUsersSelected[1].id);
+          // alert('consulted user:' + $scope.consultedUsersSelected[0].id);
+           
+    });
+    }
     vm.enableStatus = function(task) {
         return task === undefined || task.id === 0;
     };
