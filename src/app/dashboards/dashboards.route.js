@@ -7,8 +7,12 @@
 
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider     
-        .state('index.dashboards', {
+    $stateProvider
+    .state('dashboard', {
+        abstract: true,
+        templateUrl: "app/components/common/content.html"
+      })
+        .state('dashboard.dashboards', {
             url: "/home",
             templateUrl:"app/dashboards/home.html",
         data: { pageTitle: 'Dashboard' },

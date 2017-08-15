@@ -14,7 +14,7 @@ angular.module('inspinia')
             userService.getUserProfile()
             .then(function (data) {
                  //alert(dataFromStorage.username);
-            $state.go('index.dashboards');
+            $state.go('dashboard.dashboards');
             })           
         });
     }
