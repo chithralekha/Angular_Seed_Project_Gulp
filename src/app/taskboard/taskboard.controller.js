@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state, $uibModal, $scope) {
+    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state, $uibModal, $scope,config,$cookies) {
     
     var vm = this;
     
@@ -53,20 +53,30 @@ angular.module('inspinia')
             if(destinationList === 'vm.todoList') {
                 
                 itemdata = vm.todoList[toIndex];
-                console.log('item in todoList' + itemdata);
+                getTask(itemdata.id, 1);
+                alert(vm.task.id);
+                vm.task.taskState = {id : 1,
+                                    name : 'New'};
+                dataservice.saveTask(vm.task);
+                console.log('item in todoList' + vm.task);
             }
             
             if(destinationList === 'vm.inProgressList') {
                 
                 itemdata = vm.inProgressList[toIndex];
+                itemdata.taskState.id = 2;
+                itemdata.taskState.name = 'In Progress';
                 console.log('item in inProgressList' + itemdata.id);
             }
             
             if(destinationList === 'vm.completedList') {
                 
                 itemdata = vm.completedList[toIndex];
+                itemdata.taskState.id = 3;
+                itemdata.taskState.name = 'Completed';
                 console.log('item in completedList' + itemdata);
             }
+             
         }
     };
 //    vm.open = function() {
@@ -108,5 +118,16 @@ angular.module('inspinia')
             vm.completedList = data.completedList;
            return vm.todoList;
         });
+    }
+    
+    function getTask(id, state) {
+        return dataservice.getTask(id)
+        .then(function (data) {
+            alert(data.id);
+            data.taskState.id=1;
+            data.taskState.name='New';
+            dataservice.saveTask(data);
+         return data;
+        })
     }
 });

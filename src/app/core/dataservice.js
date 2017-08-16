@@ -14,7 +14,7 @@
         });
 
     /* @ngInject */
-    function dataservice($http, $location, $q, exception, logger,config) {
+    function dataservice($http, $location, $q, exception, logger,config, $cookies) {
         var isPrimed = false;
         var primePromise;
 
@@ -22,6 +22,7 @@
             
             getTasksSummary : getTasksSummary,
             getAllTasks : getAllTasks,
+            getTask : getTask,
             getAllWorkingSets : getAllWorkingSets,
             getAllFilters : getAllFilters,
             saveTask : saveTask,
@@ -90,6 +91,29 @@
 //                return data.data;
 //            }
             return deferred.promise;
+        }
+        
+        function getTask(id) {
+            var deferred = $q.defer();
+            
+            var tasksPromise = getTask(id);
+            
+            $q.when(tasksPromise)
+            .then(function (tasksData) {
+                var task = tasksData
+                deferred.resolve(task);
+            });
+            
+            return deferred.promise;
+        }
+        
+        function getTask(id) {
+            return $http({
+                method: 'GET',
+                url: config.baseURL + 'Tasks/' + id
+            })
+            .then(sendResponseData)
+            .catch(sendGetTaskError)
         }
         
         function getAllControlSets() {
@@ -180,6 +204,12 @@
 
         }
         
+        function sendGetTaskError(response) {
+
+            return $q.reject('Error retrieving Task. (HTTP status: ' + response.status + ')');
+
+        }
+        
         function getAllWorkingSets() {
             return $http({
                 method: 'GET',
@@ -224,7 +254,7 @@
         function saveTask(task) {
             alert(task.title);
             //task.title = 'Policy Control 1 Task1';
-            $http.put(config.baseURL + 'Tasks/' + task.id, task);
+            $http.put(config.baseURL + 'Tasks/' + task.id, task,{ headers: { 'Authorization' : 'Bearer ' + $cookies.get('AccessToken') } });
             alert('success');
         }
 
