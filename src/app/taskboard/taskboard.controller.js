@@ -66,6 +66,7 @@ angular.module('inspinia')
                 itemdata = vm.inProgressList[toIndex];
                 itemdata.taskState.id = 2;
                 itemdata.taskState.name = 'In Progress';
+                getTask(itemdata.id, 2);
                 console.log('item in inProgressList' + itemdata.id);
             }
             
@@ -74,6 +75,7 @@ angular.module('inspinia')
                 itemdata = vm.completedList[toIndex];
                 itemdata.taskState.id = 3;
                 itemdata.taskState.name = 'Completed';
+                getTask(itemdata.id, 3);
                 console.log('item in completedList' + itemdata);
             }
              
@@ -124,7 +126,7 @@ angular.module('inspinia')
         return dataservice.getTask(id)
         .then(function (data) {
             alert(data.id);
-            data.taskState.id=1;
+            data.taskState.id=state;
             data.taskState.name='New';
             dataservice.saveTask(data);
          return data;
