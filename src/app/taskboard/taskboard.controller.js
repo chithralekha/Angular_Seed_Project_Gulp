@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state, $uibModal, $scope,config,$cookies) {
+    .controller('TaskboardController', function (dataservice, taskDueStatusClassService, logger, $stateParams, $state, $uibModal, $scope,config,$cookies, $rootScope,$localStorage) {
     
     var vm = this;
     
-    vm.userName = 'Example user';
+    var dataFromStorage = $localStorage.getObject('Token','{}');
+    vm.userName = dataFromStorage.username;
+    var userFromStorage = $localStorage.getObject('Profile','{}');
+    vm.userData = userFromStorage.data;
+    alert(vm.userData);
     vm.helloText = 'Taskboard';
     vm.descriptionText = 'Taskboard';
     vm.taskDueStatusClass = taskDueStatusClassService.retrieveTaskDueStatusClass;
@@ -127,8 +131,10 @@ angular.module('inspinia')
         .then(function (data) {
             alert(data.id);
             data.taskState.id=state;
+            data.raciTeam.responsibleUser = { id : vm.userData.id, firstName : vm.userData.userName  };
             data.taskState.name='New';
             dataservice.saveTask(data);
+            $rootScope.$broadcast('task:updated', data);
          return data;
         })
     }
