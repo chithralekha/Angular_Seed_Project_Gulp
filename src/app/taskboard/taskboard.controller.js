@@ -131,7 +131,7 @@ angular.module('inspinia')
         .then(function (data) {
             alert(data.id);
             data.taskState.id=state;
-            data.raciTeam.responsibleUser = { id : vm.userData.id, firstName : vm.userData.userName  };
+            data.raciTeam.responsibleUser = { id : vm.userData.id, userName : vm.userData.userName  };
             data.taskState.name='New';
             dataservice.saveTask(data);
             $rootScope.$broadcast('task:updated', data);
