@@ -32,19 +32,28 @@ angular.module('inspinia')
     $scope.$on('task:updated', function (event, task) {
             alert('From Parent  ..' + task.id + 'Task State=' + task.taskState.name);
         if(task.taskState.name === 'New') {
-            angular.forEach(vm.todoList, function (item) {
+            vm.update(vm.todoList,task);
+        }
+        else if(task.taskState.name === 'In Progress') {
+              vm.update(vm.inProgressList,task);  
+            }
+        else if(task.taskState.name === 'Completed') {
+             vm.update(vm.completedList,task); 
+        }
+    })
+    vm.update = function(source,task) {
+           angular.forEach(source, function (item) {
                 if(item.id === task.id) {
                     item.title = task.title;
                     item.code = task.code;
                     item.responsibleUser.userName = task.raciTeam.responsibleUser.userName;
-                    var index = vm.todoList.indexOf(item);
-                    var copy = angular.copy(vm.todoList[index]);
+                    var index = source.indexOf(item);
+                    var copy = angular.copy(source[index]);
                     copy.dueStatus.status = 'Overdue';
-                    vm.todoList[index] = copy;
+                    source[index] = copy;
                 }
-            })
+            }) 
         }
-        })
     vm.sortableOptions = {
         connectWith: ".connectList",
         stop : function(e, ui) {
@@ -57,11 +66,7 @@ angular.module('inspinia')
             if(destinationList === 'vm.todoList') {
                 
                 itemdata = vm.todoList[toIndex];
-                getTask(itemdata.id, 1);
-                alert(vm.task.id);
-                vm.task.taskState = {id : 1,
-                                    name : 'New'};
-                dataservice.saveTask(vm.task);
+                getTask(itemdata.id, 1, "New");
                 console.log('item in todoList' + vm.task);
             }
             
@@ -70,7 +75,7 @@ angular.module('inspinia')
                 itemdata = vm.inProgressList[toIndex];
                 itemdata.taskState.id = 2;
                 itemdata.taskState.name = 'In Progress';
-                getTask(itemdata.id, 2);
+                getTask(itemdata.id, 2, "In Progress");
                 console.log('item in inProgressList' + itemdata.id);
             }
             
@@ -79,7 +84,7 @@ angular.module('inspinia')
                 itemdata = vm.completedList[toIndex];
                 itemdata.taskState.id = 3;
                 itemdata.taskState.name = 'Completed';
-                getTask(itemdata.id, 3);
+                getTask(itemdata.id, 3, "Completed");
                 console.log('item in completedList' + itemdata);
             }
              
@@ -126,13 +131,13 @@ angular.module('inspinia')
         });
     }
     
-    function getTask(id, state) {
+    function getTask(id, state, stateName) {
         return dataservice.getTask(id)
         .then(function (data) {
             alert(data.id);
             data.taskState.id=state;
             data.raciTeam.responsibleUser = { id : vm.userData.id, userName : vm.userData.userName  };
-            data.taskState.name='New';
+            data.taskState.name = stateName;
             dataservice.saveTask(data);
             $rootScope.$broadcast('task:updated', data);
          return data;
