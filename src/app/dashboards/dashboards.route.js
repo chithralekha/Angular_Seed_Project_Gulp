@@ -24,6 +24,8 @@
                         .then(function (data) { 
                     return data;
                     })
+        },
+        tasksSummary : function(dataservice) {
         }
         }
                               

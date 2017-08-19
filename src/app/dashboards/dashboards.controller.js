@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('DashboardController', function (workingSets, logger, $filter, workingSetComplianceColorCodeService) {
+    .controller('DashboardController', function (workingSets, logger, $filter, workingSetComplianceColorCodeService, tasksSummary) {
     
     var vm = this;
     vm.userName = 'Example user';
     vm.helloText = 'Dashboard';
     vm.descriptionText = 'Dashboard';
-    //alert(workingSets);
+    alert(workingSets.todoList);
     vm.workingSetComplianceColorCode = workingSetComplianceColorCodeService.retrieveWorkingSetColorCode;
 //var chart = c3.generate({
 //    bindto : '#chart',

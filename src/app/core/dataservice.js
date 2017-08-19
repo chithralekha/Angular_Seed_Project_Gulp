@@ -539,6 +539,7 @@
     }
     
     function retrieveWorkingSetColorCode(wsComlianceScore) {
+        alert(wsComlianceScore);
         var complianceColorCode = null;
         switch(true)
         {
@@ -552,6 +553,7 @@
                 complianceColorCode = '#0e6037';
                 break;
         }
+        alert(complianceColorCode);
         return complianceColorCode;
     }
 })();
