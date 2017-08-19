@@ -7,7 +7,7 @@ angular.module('inspinia')
     vm.userName = 'Example user';
     vm.helloText = 'Dashboard';
     vm.descriptionText = 'Dashboard';
-    alert(workingSets);
+    //alert(workingSets);
     vm.workingSetComplianceColorCode = workingSetComplianceColorCodeService.retrieveWorkingSetColorCode;
 //var chart = c3.generate({
 //    bindto : '#chart',
@@ -54,7 +54,6 @@ angular.module('inspinia')
     var businessControlProfile = ['Business Control Profiles'];
     var value = ['value'];
     angular.forEach(workingSets, function (workingSet) {
-        alert(workingSet.id);
         businessControlProfile.push(workingSet.name);
         value.push(workingSet.workingSetCompliance);
     }) 
@@ -74,7 +73,6 @@ angular.module('inspinia')
 		colors: {
       value: function(d) {
         var val= vm.workingSetComplianceColorCode(d.value);
-          alert('Color Code' + val);
           return val;
         //'#'+(0xff0000+(d.value-25)*256*3).toString(16);
       }
