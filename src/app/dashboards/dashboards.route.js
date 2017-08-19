@@ -17,7 +17,16 @@
             templateUrl:"app/dashboards/home.html",
         data: { pageTitle: 'Dashboard' },
         controller: 'DashboardController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve : {
+        workingSets : function(dataservice) {
+                    return dataservice.getAllWorkingSets()
+                        .then(function (data) { 
+                    return data;
+                    })
+        }
+        }
+                              
       });
 
 

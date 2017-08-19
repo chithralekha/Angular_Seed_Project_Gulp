@@ -1,18 +1,95 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('DashboardController', function (dataservice, logger, $filter) {
+    .controller('DashboardController', function (workingSets, logger, $filter) {
     
     var vm = this;
     vm.userName = 'Example user';
     vm.helloText = 'Dashboard';
     vm.descriptionText = 'Dashboard';
+    alert(workingSets);
+   
+//var chart = c3.generate({
+//    bindto : '#chart',
+//    data: {
+//      columns: [
+//        ['data1', 30],
+//        ['data2', 50],
+//        ['data3',50]  
+//      ],
+//         type:'pie'
+//    }
+//    
+//});
+//    var chart = c3.generate({
+//    bindto: '#chart',
+//    data: {
+//      columns: [
+//        ['data1', 30, 200, 100, 400, 150, 250],
+//        ['data2', 50, 20, 10, 40, 15, 25]
+//      ],
+//      axes: {
+//        data2: 'y2'
+//      },
+//      types: {
+//        data2: 'bar' // ADD
+//      }
+//    },
+//    axis: {
+//      y: {
+//        label: {
+//          text: 'Y Label',
+//          position: 'outer-middle'
+//        }
+//      },
+//      y2: {
+//        show: true,
+//        label: {
+//          text: 'Y2 Label',
+//          position: 'outer-middle'
+//        }
+//      }
+//    }
+//});
+    var businessControlProfile = ['Business Control Profiles'];
+    var value = ['value'];
+    angular.forEach(workingSets, function (workingSet) {
+        alert(workingSet.id);
+        businessControlProfile.push(workingSet.name);
+        value.push(50);
+    }) 
     
-    vm.formatValue = function(value, ratio) {
-        var val = Math.abs(value);
-        return val;
+    var chart = c3.generate({
+ bindto: '#chart',
+  data: {
+    x: 'Business Control Profiles',
+    columns:
+    [
+      businessControlProfile,
+      value
+    ],
+
+    type: 'bar',
+    
+		colors: {
+      value: function(d) {
+        return '#'+(0xff0000+(d.value-25)*256*3).toString(16);
+      }
+    },
+
+  },
+  axis: {
+    x: {
+      type: 'category',
+        tick: {
+          rotate: 50 // ADD
+        }
     }
-    
+  },
+  legend: {
+    show: false
+  }
+});
     activate();
     
     function activate() {
@@ -21,10 +98,11 @@ angular.module('inspinia')
         //            var promises = [getAvengers()];
         //            return dataservice.ready(promises).then(function(){
         
-        return getAllWorkingSets()
-                .then(function () {
-                logger.info('Activated Dashboard View');
-            });
+//        return getAllWorkingSets()
+//                .then(function () {
+//                logger.info('Activated Dashboard View');
+//            });
+        vm.businessControlProfileList = workingSets;
         }
     
     function getAllWorkingSets() {
