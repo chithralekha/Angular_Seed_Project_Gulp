@@ -80,6 +80,7 @@ angular.module('inspinia')
 
   },
   axis: {
+      rotated: true,
     x: {
       type: 'category',
         tick: {

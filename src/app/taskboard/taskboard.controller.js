@@ -9,7 +9,7 @@ angular.module('inspinia')
     vm.userName = dataFromStorage.username;
     var userFromStorage = $localStorage.getObject('Profile','{}');
     vm.userData = userFromStorage.data;
-    alert(vm.userData);
+    //alert(vm.userData);
     vm.helloText = 'Taskboard';
     vm.descriptionText = 'Taskboard';
     vm.taskDueStatusClass = taskDueStatusClassService.retrieveTaskDueStatusClass;
