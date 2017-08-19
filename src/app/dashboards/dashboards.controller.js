@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('inspinia')
-    .controller('DashboardController', function (workingSets, logger, $filter) {
+    .controller('DashboardController', function (workingSets, logger, $filter, workingSetComplianceColorCodeService) {
     
     var vm = this;
     vm.userName = 'Example user';
     vm.helloText = 'Dashboard';
     vm.descriptionText = 'Dashboard';
     alert(workingSets);
-   
+    vm.workingSetComplianceColorCode = workingSetComplianceColorCodeService.retrieveWorkingSetColorCode;
 //var chart = c3.generate({
 //    bindto : '#chart',
 //    data: {
@@ -73,7 +73,10 @@ angular.module('inspinia')
     
 		colors: {
       value: function(d) {
-        return '#'+(0xff0000+(d.value-25)*256*3).toString(16);
+        var val= vm.workingSetComplianceColorCode(d.value);
+          alert('Color Code' + val);
+          return val;
+        //'#'+(0xff0000+(d.value-25)*256*3).toString(16);
       }
     },
 

@@ -11,7 +11,10 @@
         .factory('$modalFactory', $modalFactory)
         .value('taskDueStatusClassService', {
             retrieveTaskDueStatusClass : retrieveTaskDueStatusClass
-        });
+        })
+        .value('workingSetComplianceColorCodeService', { 
+        retrieveWorkingSetColorCode : retrieveWorkingSetColorCode
+    });
 
     /* @ngInject */
     function dataservice($http, $location, $q, exception, logger,config, $cookies) {
@@ -533,5 +536,25 @@
                 break;
         }
         return dueStatusClass;
+    }
+    
+    function retrieveWorkingSetColorCode(wsComlianceScore) {
+        var complianceColorCode = null;
+        alert(wsComlianceScore);
+        switch(true)
+        {
+            case (wsComlianceScore >=0 && wsComlianceScore <= 39) :
+                complianceColorCode = '#cd0000';
+                break;
+            case (wsComlianceScore >= 40 && wsComlianceScore <= 69) :
+                complianceColorCode  = '#dda33e';
+                break;
+            case (wsComlianceScore >= 70 && wsComlianceScore <= 100) :
+                alert(100);
+                complianceColorCode = '#0e6037';
+                break;
+        }
+        alert(complianceColorCode);
+        return complianceColorCode;
     }
 })();
