@@ -56,7 +56,7 @@ angular.module('inspinia')
     angular.forEach(workingSets, function (workingSet) {
         alert(workingSet.id);
         businessControlProfile.push(workingSet.name);
-        value.push(50);
+        value.push(workingSet.workingSetCompliance);
     }) 
     
     var chart = c3.generate({
