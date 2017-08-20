@@ -58,7 +58,7 @@ angular.module('inspinia')
     }) 
     
     var chart = c3.generate({
- bindto: '#chart',
+ bindto: '#chart1',
   data: {
     x: 'Business Control Profiles',
     columns:
@@ -118,6 +118,48 @@ angular.module('inspinia')
       }
     },
     }
+});
+    var full = [
+    ['x', 'WorkingSet1', 'WorkingSet2', 'WorkingSet3'],
+    ['Compliance Score', 6, 13, 4],
+    ['Task Completed', 3, 3, 5],
+    ['Tasks OverDue', 61, 0, 4],
+    ['Tasks Unassigned', 4, 0, 8]
+];
+
+var chart = c3.generate({
+    data: {
+        x: 'x',
+        columns: full,
+        type: 'bar',
+    },
+    bar: {
+        width: {
+            ratio: 0.8 // this makes bar width 50% of length between ticks
+        }
+    },
+//    axis: {
+//        x: {
+//            type: 'category' // this is needed to load string x value
+//        }
+//    },
+     axis: {
+      rotated: true,
+    x: {
+      type: 'category',
+        tick: {
+          rotate: 50 // ADD
+        }
+    }
+  },
+     colors: {
+      value: function(d) {
+        var val= vm.workingSetComplianceColorCode(d.value);
+          return val;
+        //'#'+(0xff0000+(d.value-25)*256*3).toString(16);
+      }
+    },
+    bindto: '#chart'
 });
     activate();
     
