@@ -7,7 +7,6 @@ angular.module('inspinia')
     vm.userName = 'Example user';
     vm.helloText = 'Dashboard';
     vm.descriptionText = 'Dashboard';
-    alert(workingSets.todoList);
     vm.workingSetComplianceColorCode = workingSetComplianceColorCodeService.retrieveWorkingSetColorCode;
 //var chart = c3.generate({
 //    bindto : '#chart',
@@ -91,6 +90,34 @@ angular.module('inspinia')
   legend: {
     show: false
   }
+});
+    var chart = c3.generate({
+        bindto: '#chart1',
+         x: 'Business Control Profiles',
+    data: {
+        columns: [
+            ['Business Control Profile', 0, 20, 50, 40, 60, 50],
+            ['Task Completed', 200, 130, 90, 240, 130, 220],
+            ['Tasks Overdue', 300, 200, 160, 400, 250, 250]
+        ],
+        type: 'bar',
+         axis: {
+      rotated: true,
+    x: {
+      type: 'category',
+        tick: {
+          rotate: 50 // ADD
+        }
+    }
+  },
+        colors: {
+      value: function(d) {
+        var val= vm.workingSetComplianceColorCode(d.value);
+          return val;
+        //'#'+(0xff0000+(d.value-25)*256*3).toString(16);
+      }
+    },
+    }
 });
     activate();
     

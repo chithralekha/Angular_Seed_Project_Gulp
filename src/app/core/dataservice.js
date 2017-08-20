@@ -216,15 +216,23 @@
         function getAllWorkingSets() {
             return $http({
                 method: 'GET',
-                url: config.baseURL + 'WorkingSets/'
+                url: config.baseURL + 'WorkingSets/',
 //                headers: {
 //                    'PS-BookLogger-Version': constants.APP_VERSION
 //                },
-//                transformResponse: transformGetBooks,
-//                cache: true
+                transformResponse: transformGetAllWorkingSets,
+                cache: true
             })
             .then(sendResponseData)
             .catch(sendGetWorkingSetsError)
+        }
+        
+        function transformGetAllWorkingSets(data, headersGetter) {
+            var transformed = angular.fromJson(data);
+            transformed.forEach( function (currentValue, index, array) {
+                currentValue.color = retrieveWorkingSetColorCode(currentValue.workingSetCompliance);
+            });
+            return transformed;
         }
         
         function sendGetWorkingSetsError(response) {
@@ -539,7 +547,6 @@
     }
     
     function retrieveWorkingSetColorCode(wsComlianceScore) {
-        alert(wsComlianceScore);
         var complianceColorCode = null;
         switch(true)
         {
@@ -553,7 +560,6 @@
                 complianceColorCode = '#0e6037';
                 break;
         }
-        alert(complianceColorCode);
         return complianceColorCode;
     }
 })();
