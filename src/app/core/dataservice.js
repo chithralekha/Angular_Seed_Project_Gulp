@@ -230,7 +230,7 @@
         function transformGetAllWorkingSets(data, headersGetter) {
             var transformed = angular.fromJson(data);
             transformed.forEach( function (currentValue, index, array) {
-                currentValue.color = retrieveWorkingSetColorCode(currentValue.workingSetCompliance);
+                currentValue.color = retrieveWorkingSetColorCode(currentValue.workingSetCompliance);// '#cd0000';
             });
             return transformed;
         }
