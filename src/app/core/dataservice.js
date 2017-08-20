@@ -220,8 +220,7 @@
 //                headers: {
 //                    'PS-BookLogger-Version': constants.APP_VERSION
 //                },
-                transformResponse: transformGetAllWorkingSets,
-                cache: true
+                transformResponse: transformGetAllWorkingSets
             })
             .then(sendResponseData)
             .catch(sendGetWorkingSetsError)
