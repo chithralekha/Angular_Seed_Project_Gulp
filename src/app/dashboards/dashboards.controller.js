@@ -119,12 +119,19 @@ angular.module('inspinia')
     },
     }
 });
+    var bcp = ['x'];
+    var complianceScore = ['Compliance Score'], tasksCompleted = ['Task Completed', 3, 3, 5], tasksOverdue = ['Tasks OverDue', 61, 0, 4], tasksUnassigned = ['Tasks Unassigned', 4, 0, 8];
+    angular.forEach(workingSets, function (workingSet) {
+        bcp.push(workingSet.name);
+        complianceScore.push(workingSet.workingSetCompliance);
+    }); 
+    
     var full = [
-    ['x', 'WorkingSet1', 'WorkingSet2', 'WorkingSet3'],
-    ['Compliance Score', 6, 13, 4],
-    ['Task Completed', 3, 3, 5],
-    ['Tasks OverDue', 61, 0, 4],
-    ['Tasks Unassigned', 4, 0, 8]
+    bcp,
+    complianceScore,
+    tasksCompleted,
+    tasksOverdue,
+    tasksUnassigned
 ];
 
 var chart = c3.generate({
