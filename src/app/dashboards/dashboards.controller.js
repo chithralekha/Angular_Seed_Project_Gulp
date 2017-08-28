@@ -159,7 +159,7 @@ var chart = c3.generate({
         }
     }
   },
-     colors: {
+    colors: {
       value: function(d) {
         var val= vm.workingSetComplianceColorCode(d.value);
           return val;
@@ -168,6 +168,28 @@ var chart = c3.generate({
     },
     bindto: '#chart'
 });
+//    var chart = c3.generate({
+//    data: {
+//        columns: [
+//            ['data1', 30, 20, 50, 40, 60, 50],
+//            ['data2', 20, 30, 90, 40, 30, 20],
+//            ['data3', 30, 20, 60, 40, 25, 50]
+//        ],
+//        type: 'bar',
+//        colors: {
+//            data1: '#ff0000',
+//            data2: '#00ff00',
+//            data3: '#0000ff'
+//        },
+//        color: function (color, d) {
+//            // d will be 'id' when called for legends
+//            //return d.id && d.id === 'data3' ? d3.rgb(color).darker(d.value / 150) : color;
+//            var val= vm.workingSetComplianceColorCode(d.value);
+//          return val;
+//        },
+//        bindto: '#chart1'
+//    }
+//});
     activate();
     
     function activate() {

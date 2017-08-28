@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app\core\navigation.controller.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/core/</a> navigation.controller.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.32% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>9/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.32% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/37</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+angular.module('inspinia')
+    .controller('NavigationController', <span class="fstat-no" title="function not covered" >function (dataservice, logger, $stateParams, AuthFactory, $localStorage, USER_ROLES, userService) {</span>
+    
+<span class="cstat-no" title="statement not covered" >    var vm = this;</span>
+<span class="cstat-no" title="statement not covered" >    var dataFromStorage = $localStorage.getObject('Token','{}');</span>
+<span class="cstat-no" title="statement not covered" >    vm.userName = dataFromStorage.username;</span>
+<span class="cstat-no" title="statement not covered" >    vm.userRoles = USER_ROLES;</span>
+<span class="cstat-no" title="statement not covered" >    vm.userData = $localStorage.getObject('Profile', '{}');</span>
+    
+<span class="cstat-no" title="statement not covered" >    vm.isAuthorized = <span class="fstat-no" title="function not covered" >function (authorizedRoles) {</span></span>
+        
+<span class="cstat-no" title="statement not covered" >        var isAuthorizedUser = false;</span>
+<span class="cstat-no" title="statement not covered" >        if (!angular.isArray(authorizedRoles)) {</span>
+<span class="cstat-no" title="statement not covered" >            authorizedRoles = [authorizedRoles];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        angular.forEach(vm.userData.data.roles, <span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(authorizedRoles.indexOf(item) !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >                isAuthorizedUser = true;</span>
+            }
+        });
+<span class="cstat-no" title="statement not covered" >        return(isAuthorizedUser);</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    dataservice.getAllWorkingSets()</span>
+        .then(getWorkingSetsSuccess, null, getWorkingSetsNotification)
+        .catch(errorCallback)
+        .finally(getAllWorkingSetsComplete);
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getWorkingSetsSuccess(workingSets) {</span>
+            
+<span class="cstat-no" title="statement not covered" >            vm.businessControlProfileList = workingSets;</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getWorkingSetsNotification(notification) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('Promise Notification: ' + notification);</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function errorCallback(errorMsg) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('Error Message: ' + errorMsg);</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getAllWorkingSetsComplete() {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('getAllWorkingSets has completed');</span>
+        }
+    
+<span class="cstat-no" title="statement not covered" >    dataservice.getAllFilters()</span>
+        .then(getFiltersSuccess, null, getFiltersNotification)
+        .catch(errorCallback)
+        .finally(getAllFiltersComplete);
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getFiltersSuccess(filters) {</span>
+            
+<span class="cstat-no" title="statement not covered" >            vm.filters = filters;</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getFiltersNotification(notification) {</span>
+            
+<span class="cstat-no" title="statement not covered" >            console.log('Promise Notification: ' + notification);</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function errorCallback(errorMsg) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('Error Message: ' + errorMsg);</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function getAllFiltersComplete() {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('getAllFilters has completed');</span>
+        }
+    
+<span class="cstat-no" title="statement not covered" >        vm.bcpNavClass = <span class="fstat-no" title="function not covered" >function (bcp) {</span></span>
+            
+<span class="cstat-no" title="statement not covered" >          return bcp.id ==  $stateParams.bcp ? 'active' : '';  </span>
+        };
+    
+<span class="cstat-no" title="statement not covered" >        vm.filterNavClass = <span class="fstat-no" title="function not covered" >function (filter) {</span></span>
+            
+<span class="cstat-no" title="statement not covered" >            var filterClass = filter.filterId == $stateParams.filterText ? 'active' : '';</span>
+<span class="cstat-no" title="statement not covered" >            return filterClass</span>
+        }
+    });</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Aug 22 2017 10:54:22 GMT-0400 (Eastern Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
